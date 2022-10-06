@@ -1,4 +1,8 @@
-name: TwitchMinecraftPlugin
+name: Skitch
+author: Trason
+description: Skript addon for Twitch-Bots
 version: @version@
-main: com.github.twitch4j.minecraft.TwitchMinecraftPlugin
-api-version: 1.15
+main: com.skitch.trason.addon.Skitch
+api-version: 1.19
+softdepend:
+  - Skript

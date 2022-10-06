@@ -1,37 +1,43 @@
-package com.github.twitch4j.minecraft;
+package com.skitch.trason.addon;
 
 import com.github.philippheuer.events4j.simple.domain.EventSubscriber;
-import com.github.twitch4j.chat.events.channel.CheerEvent;
-import com.github.twitch4j.chat.events.channel.FollowEvent;
-import com.github.twitch4j.chat.events.channel.GiftSubscriptionsEvent;
-import com.github.twitch4j.chat.events.channel.SubscriptionEvent;
+import com.github.twitch4j.chat.events.channel.*;
 import com.github.twitch4j.events.ChannelGoLiveEvent;
 import com.github.twitch4j.events.ChannelGoOfflineEvent;
-import com.github.twitch4j.helix.domain.Stream;
-import org.bukkit.Color;
-import org.bukkit.FireworkEffect;
-import org.bukkit.Location;
-import org.bukkit.World;
+import com.skitch.trason.addon.elements.events.bukkit.EventChat;
+import com.skitch.trason.addon.elements.events.bukkit.EventGoLive;
+import com.skitch.trason.addon.elements.events.bukkit.EventOffLive;
+import org.bukkit.*;
 import org.bukkit.entity.Firework;
 import org.bukkit.inventory.meta.FireworkMeta;
 
 public class TwitchEventHandler {
 
-    private final TwitchMinecraftPlugin plugin;
+    private final Skitch plugin;
 
-    public TwitchEventHandler(TwitchMinecraftPlugin plugin) {
+    public TwitchEventHandler(Skitch plugin) {
         this.plugin = plugin;
     }
 
     @EventSubscriber
     public void onStreamUp(ChannelGoLiveEvent event) {
-        Stream stream = event.getStream();
-        broadcast(String.format("[Twitch] %s has gone live for %d viewers: %s", stream.getUserName(), stream.getViewerCount(), stream.getTitle()));
+        Bukkit.getScheduler().runTask(plugin, () -> { // Call event on the main thread
+            Bukkit.getPluginManager().callEvent(new EventGoLive(event));
+        });
     }
 
     @EventSubscriber
     public void onStreamDown(ChannelGoOfflineEvent event) {
-        broadcast(String.format("[Twitch] %s has stopped streaming.", event.getChannel().getName()));
+        Bukkit.getScheduler().runTask(plugin, () -> { // Call event on the main thread
+            Bukkit.getPluginManager().callEvent(new EventOffLive(event));
+        });
+    }
+
+    @EventSubscriber
+    public void onChat(ChannelMessageEvent event) {
+        Bukkit.getScheduler().runTask(plugin, () -> { // Call event on the main thread
+            Bukkit.getPluginManager().callEvent(new EventChat(event));
+        });
     }
 
     @EventSubscriber
