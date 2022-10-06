@@ -48,6 +48,10 @@ public class StructTwitch extends Structure {
     @Override
     public boolean load() {
 
+        client.getEventManager().close();
+        client.close();
+
+
 
 
         EntryContainer container = getEntryContainer();
