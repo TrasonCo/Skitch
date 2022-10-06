@@ -1,4 +1,4 @@
-package com.skitch.trason.addon.elements.events;
+package com.skitch.trason.addon.elements.effects;
 
 import ch.njol.skript.Skript;
 import ch.njol.skript.lang.Effect;
