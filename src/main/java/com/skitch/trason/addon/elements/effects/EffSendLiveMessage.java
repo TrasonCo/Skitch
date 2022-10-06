@@ -5,7 +5,6 @@ import ch.njol.skript.lang.Effect;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
-import com.github.twitch4j.TwitchClient;
 import org.bukkit.event.Event;
 
 import static com.skitch.trason.addon.elements.stucture.StructTwitch.client;
@@ -13,39 +12,8 @@ import static com.skitch.trason.addon.elements.stucture.StructTwitch.client;
 
 public class EffSendLiveMessage extends Effect{
 
-
-
-
     static {
         Skript.registerEffect(EffSendLiveMessage.class, "send %string% to [the] livechat %string%");
-    }
-
-
-    private String channel;
-    private String message;
-
-
-    private Expression<String> exprMessage;
-    private Expression<String> exprLiveChannel;
-
-
-
-    public static TwitchClient getClient() {
-        return client;
-    }
-
-    @Override
-    protected void execute(Event event) {
-        client = getClient();
-        client.getChat().sendMessage(exprMessage.getSingle(event), exprLiveChannel.getSingle(event)); //Variablen werden nicht gesendet
-
-
-
-    }
-
-    @Override
-    public String toString( Event e, boolean debug) {
-        return null;
     }
 
     @SuppressWarnings("unchecked")
@@ -54,5 +22,25 @@ public class EffSendLiveMessage extends Effect{
         this.exprMessage = (Expression<String>) exprs[0];
         this.exprLiveChannel = (Expression<String>) exprs[1];
         return true;
+    }
+
+    private Expression<String> exprMessage;
+    private Expression<String> exprLiveChannel;
+
+    @Override
+    protected void execute(Event event) {
+        String message = exprMessage.getSingle(event);
+        String liveChannel = exprLiveChannel.getSingle(event);
+        // We check if the values are null, you should always do this for expression :)
+        if (message == null || liveChannel == null)
+            return;
+
+        client.getChat().sendMessage(message, liveChannel); //Variablen werden nicht gesendet
+    }
+
+    @Override
+    public String toString( Event e, boolean debug) {
+        // NEVER return null here! It's used for debugging and more, so it's important to return a valid string representing the effect.
+        return "send " + exprMessage.toString(e, debug) + " to livechat " + exprLiveChannel.toString(e, debug);
     }
 }

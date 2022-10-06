@@ -48,8 +48,11 @@ public class StructTwitch extends Structure {
     @Override
     public boolean load() {
 
-        client.getEventManager().close();
-        client.close();
+        // We need to check if the client is set or not, else it'll throw an error
+        if (client != null) {
+            client.getEventManager().close();
+            client.close();
+        }
 
 
 
