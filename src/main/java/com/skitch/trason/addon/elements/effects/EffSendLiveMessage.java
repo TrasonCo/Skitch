@@ -1,4 +1,4 @@
-package com.skitch.trason.addon.elements.events;
+package com.skitch.trason.addon.elements.effects;
 
 import ch.njol.skript.Skript;
 import ch.njol.skript.lang.Effect;
@@ -6,7 +6,6 @@ import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
 import com.github.twitch4j.TwitchClient;
-import com.skitch.trason.addon.elements.stucture.StructTwitch;
 import org.bukkit.event.Event;
 
 import static com.skitch.trason.addon.elements.stucture.StructTwitch.client;
