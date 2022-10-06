@@ -35,7 +35,7 @@ public class EffSendLiveMessage extends Effect{
         if (message == null || liveChannel == null)
             return;
 
-        client.getChat().sendMessage(message, liveChannel); //Variablen werden nicht gesendet
+        client.getChat().sendMessage(liveChannel, message); //Variablen werden nicht gesendet
     }
 
     @Override
