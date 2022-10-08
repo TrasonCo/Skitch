@@ -12,7 +12,7 @@ import org.bukkit.event.Event;
 public class ExprGiftSubAmount extends SimpleExpression<String> {
 
     static {
-        Skript.registerExpression(ExprGiftSubAmount.class, String.class, ExpressionType.SIMPLE, "sub[-| ]amount");
+        Skript.registerExpression(ExprGiftSubAmount.class, String.class, ExpressionType.SIMPLE, "[event-]subamount");
     }
 
     @Override
@@ -36,7 +36,7 @@ public class ExprGiftSubAmount extends SimpleExpression<String> {
 
     @Override
     public String toString(Event e, boolean debug) {
-        return "sub amount";
+        return "subamount";
     }
 
     @Override

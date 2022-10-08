@@ -6,25 +6,20 @@ import ch.njol.skript.lang.ExpressionType;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.util.Kleenean;
-import com.skitch.trason.addon.elements.events.bukkit.*;
+import com.skitch.trason.addon.elements.events.bukkit.BridgeEventCheer;
 import org.bukkit.event.Event;
 
-public class ExprSubTier extends SimpleExpression<String> {
+public class ExprCheerBits extends SimpleExpression<String> {
 
     static {
-        Skript.registerExpression(ExprSubTier.class, String.class, ExpressionType.SIMPLE, "[event-]subtier");
+        Skript.registerExpression(ExprCheerBits.class, String.class, ExpressionType.SIMPLE, "[event-]cheerbits");
     }
 
     @Override
     protected String[] get(Event e) {
-        if (e  instanceof BridgeEventGiftSub) {
-            String subTier = ((BridgeEventGiftSub)e).getEvent().getSubscriptionPlan();
-            return new String[]{subTier};
-        }
-
-        if (e  instanceof BridgeEventSub) {
-            String subTier = ((BridgeEventSub)e).getEvent().getSubscriptionPlan();
-            return new String[]{subTier};
+        if (e  instanceof BridgeEventCheer) {
+            Integer bitsAmount = ((BridgeEventCheer)e).getEvent().getBits();
+            return new String[]{String.valueOf(bitsAmount)};
         }
         return new String[0];
     }
@@ -41,7 +36,7 @@ public class ExprSubTier extends SimpleExpression<String> {
 
     @Override
     public String toString(Event e, boolean debug) {
-        return "subtier";
+        return "event-cheerbits";
     }
 
     @Override
