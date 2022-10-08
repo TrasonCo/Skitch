@@ -38,7 +38,6 @@ public class TwitchEventHandler {
 
     @EventSubscriber
     public void onFollow(FollowEvent event) {
-//        broadcast(String.format("[Twitch] %s just followed %s!", event.getUser().getName(), event.getChannel().getName()));
         Bukkit.getScheduler().runTask(plugin, () -> { // Call event on the main thread
             Bukkit.getPluginManager().callEvent(new BridgeEventFollow(event));
         });
@@ -49,7 +48,6 @@ public class TwitchEventHandler {
         Bukkit.getScheduler().runTask(plugin, () -> { // Call event on the main thread
             Bukkit.getPluginManager().callEvent(new BridgeEventCheer(event));
         });
-        //          broadcast(String.format("[Twitch] %s just cheered %d bits for %s!", event.getUser().getName(), event.getBits(), event.getChannel().getName()));
     }
 
     @EventSubscriber
@@ -57,15 +55,13 @@ public class TwitchEventHandler {
         Bukkit.getScheduler().runTask(plugin, () -> { // Call event on the main thread
             Bukkit.getPluginManager().callEvent(new BridgeEventSub(event));
         });
-        //          broadcast(String.format("[Twitch] %s just subscribed to %s for %d months", event.getUser().getName(), event.getChannel().getName(), event.getMonths()));
-    }
+     }
 
     @EventSubscriber
     public void onSubMysteryGift(GiftSubscriptionsEvent event) {
         Bukkit.getScheduler().runTask(plugin, () -> { // Call event on the main thread
             Bukkit.getPluginManager().callEvent(new BridgeEventGiftSub(event));
         });
-        //broadcast(String.format("[Twitch] Thank you %s for gifting %d subs to %s", event.getUser().getName(), event.getCount(), event.getChannel().getName()));
 
 
 
