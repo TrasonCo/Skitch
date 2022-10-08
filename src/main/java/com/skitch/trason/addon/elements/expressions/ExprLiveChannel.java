@@ -4,11 +4,9 @@ import ch.njol.skript.Skript;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.ExpressionType;
 import ch.njol.skript.lang.SkriptParser;
-import ch.njol.skript.lang.parser.ParserInstance;
 import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.util.Kleenean;
-import com.skitch.trason.addon.elements.events.bukkit.EventChat;
-import com.skitch.trason.addon.elements.events.bukkit.EventGoLive;
+import com.skitch.trason.addon.elements.events.bukkit.*;
 import org.bukkit.event.Event;
 
 public class ExprLiveChannel extends SimpleExpression<String> {
@@ -19,13 +17,32 @@ public class ExprLiveChannel extends SimpleExpression<String> {
     @Override
     protected
     String[] get(Event e) {
-        if (e instanceof EventChat) {
-            String channel = ((EventChat) e).getEvent().getChannel().getName();
+        if (e instanceof BridgeEventChat) {
+            String channel = ((BridgeEventChat) e).getEvent().getChannel().getName();
             return new String[]{channel};
         }
-
-        if (e  instanceof EventGoLive) {
-            String channel = ((EventGoLive)e).getEvent().getChannel().getName();
+        if (e  instanceof BridgeEventCheer) {
+            String channel = ((BridgeEventCheer)e).getEvent().getChannel().getName();
+            return new String[]{channel};
+        }
+        if (e  instanceof BridgeEventFollow) {
+            String channel = ((BridgeEventFollow)e).getEvent().getChannel().getName();
+            return new String[]{channel};
+        }
+        if (e  instanceof BridgeEventGiftSub) {
+            String channel = ((BridgeEventGiftSub)e).getEvent().getChannel().getName();
+            return new String[]{channel};
+        }
+        if (e  instanceof BridgeEventGoLive) {
+            String channel = ((BridgeEventGoLive)e).getEvent().getChannel().getName();
+            return new String[]{channel};
+        }
+        if (e  instanceof BridgeEventOffLive) {
+            String channel = ((BridgeEventOffLive)e).getEvent().getChannel().getName();
+            return new String[]{channel};
+        }
+        if (e  instanceof BridgeEventSub) {
+            String channel = ((BridgeEventSub)e).getEvent().getChannel().getName();
             return new String[]{channel};
         }
 

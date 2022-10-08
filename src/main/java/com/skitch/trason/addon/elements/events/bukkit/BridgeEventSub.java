@@ -1,30 +1,28 @@
 package com.skitch.trason.addon.elements.events.bukkit;
 
-import com.github.twitch4j.events.ChannelGoOfflineEvent;
+import com.github.twitch4j.chat.events.channel.SubscriptionEvent;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 import org.jetbrains.annotations.NotNull;
 
-public class EventOffLive extends Event {
+public class BridgeEventSub extends Event {
 
     private static final HandlerList handlers = new HandlerList();
 
-    private final ChannelGoOfflineEvent event;
-    private final String ChannelName;
+    private final SubscriptionEvent event;
 
-    public EventOffLive(ChannelGoOfflineEvent event) {
+    public BridgeEventSub(SubscriptionEvent event) {
         this.event = event;
-        this.ChannelName = event.getChannel().getName();
     }
 
-    public ChannelGoOfflineEvent getEvent() {
+    public SubscriptionEvent getEvent() {
         return event;
     }
 
     @NotNull
     @Override
     public HandlerList getHandlers() {
-        return handlers;
+        return null;
     }
 
     public static HandlerList getHandlerList() { return handlers; }

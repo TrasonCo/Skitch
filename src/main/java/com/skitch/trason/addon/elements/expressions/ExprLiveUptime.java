@@ -16,18 +16,20 @@ import java.util.Collections;
 
 import static com.skitch.trason.addon.elements.stucture.StructTwitch.client;
 
-public class ExprLiveMessage extends SimpleExpression<String> {
+public class ExprLiveUptime extends SimpleExpression<String> {
 
     static {
-        Skript.registerExpression(ExprLiveMessage.class, String.class, ExpressionType.SIMPLE, "[event-]livemessage");
+        Skript.registerExpression(ExprLiveUptime.class, String.class, ExpressionType.SIMPLE, "[event-]uptime");
     }
 
     @Override
     protected
     String[] get(Event e) {
         if (e instanceof BridgeEventChat) {
-            String msg = ((BridgeEventChat) e).getEvent().getMessage();
-            return new String[]{msg};
+            StreamList list = client.getHelix().getStreams(null, null, null, 1, null, null, null, Collections.singletonList(((BridgeEventChat) e).getEvent().getChannel().getName())).execute();
+            Stream str = list.getStreams().get(0);
+            long time = str.getUptime().getSeconds();
+            return new String[]{String.format("%d:%02d:%02d", time / 3600, (time % 3600) / 60, (time % 60))};
         }
 
         return new String[0];

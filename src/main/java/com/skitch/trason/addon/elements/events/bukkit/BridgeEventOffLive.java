@@ -1,24 +1,23 @@
 package com.skitch.trason.addon.elements.events.bukkit;
 
-import com.github.twitch4j.chat.events.channel.ChannelMessageEvent;
+import com.github.twitch4j.events.ChannelGoOfflineEvent;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 import org.jetbrains.annotations.NotNull;
 
-public class EventChat extends Event {
+public class BridgeEventOffLive extends Event {
 
     private static final HandlerList handlers = new HandlerList();
 
-    private final ChannelMessageEvent event;
+    private final ChannelGoOfflineEvent event;
     private final String ChannelName;
 
-    public EventChat(ChannelMessageEvent event) {
+    public BridgeEventOffLive(ChannelGoOfflineEvent event) {
         this.event = event;
         this.ChannelName = event.getChannel().getName();
-
     }
 
-    public ChannelMessageEvent getEvent() {
+    public ChannelGoOfflineEvent getEvent() {
         return event;
     }
 
@@ -28,11 +27,5 @@ public class EventChat extends Event {
         return handlers;
     }
 
-    public static HandlerList getHandlerList() {
-        return handlers;
-    }
-
-
+    public static HandlerList getHandlerList() { return handlers; }
 }
-
-

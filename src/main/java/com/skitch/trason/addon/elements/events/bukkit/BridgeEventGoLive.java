@@ -5,14 +5,14 @@ import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 import org.jetbrains.annotations.NotNull;
 
-public class EventGoLive extends Event {
+public class BridgeEventGoLive extends Event {
 
     private static final HandlerList handlers = new HandlerList();
 
     private final ChannelGoLiveEvent event;
     private final String ChannelName;
 
-    public EventGoLive(ChannelGoLiveEvent event) {
+    public BridgeEventGoLive(ChannelGoLiveEvent event) {
         this.event = event;
         this.ChannelName = event.getChannel().getName();
     }

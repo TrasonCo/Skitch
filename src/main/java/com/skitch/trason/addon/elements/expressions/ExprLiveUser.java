@@ -6,7 +6,7 @@ import ch.njol.skript.lang.ExpressionType;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.util.Kleenean;
-import com.skitch.trason.addon.elements.events.bukkit.EventChat;
+import com.skitch.trason.addon.elements.events.bukkit.*;
 import org.bukkit.event.Event;
 
 public class ExprLiveUser extends SimpleExpression<String> {
@@ -18,8 +18,24 @@ public class ExprLiveUser extends SimpleExpression<String> {
 
     @Override
     protected  String[] get(Event e) {
-        if (e instanceof EventChat){
-            String user = ((EventChat) e).getEvent().getUser().getName();
+        if (e instanceof BridgeEventChat) {
+            String user = ((BridgeEventChat) e).getEvent().getUser().getName();
+            return new String[]{user};
+        }
+        if (e  instanceof BridgeEventCheer) {
+            String user = ((BridgeEventCheer)e).getEvent().getUser().getName();
+            return new String[]{user};
+        }
+        if (e  instanceof BridgeEventFollow) {
+            String user = ((BridgeEventFollow)e).getEvent().getUser().getName();
+            return new String[]{user};
+        }
+        if (e  instanceof BridgeEventGiftSub) {
+            String user = ((BridgeEventGiftSub)e).getEvent().getUser().getName();
+            return new String[]{user};
+        }
+        if (e  instanceof BridgeEventSub) {
+            String user = ((BridgeEventSub)e).getEvent().getUser().getName();
             return new String[]{user};
         }
         return new String[0];
