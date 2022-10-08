@@ -47,7 +47,7 @@ public class ExprLiveUptime extends SimpleExpression<String> {
 
     @Override
     public String toString(Event e, boolean debug) {
-        return "event-livemessage";
+        return "event-liveuptime";
     }
 
     @Override
