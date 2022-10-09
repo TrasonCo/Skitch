@@ -19,8 +19,8 @@ public class ExprStreamTitle extends SimpleExpression<String> {
     protected  String[] get(Event e) {
 
         if (e  instanceof BridgeEventGoLive) {
-            String channel = ((BridgeEventGoLive)e).getEvent().getStream().getTitle();
-            return new String[]{channel};
+            String title = ((BridgeEventGoLive)e).getEvent().getStream().getTitle();
+            return new String[]{title};
         }
 
         return new String[0];

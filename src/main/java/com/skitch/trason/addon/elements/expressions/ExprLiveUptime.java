@@ -52,10 +52,7 @@ public class ExprLiveUptime extends SimpleExpression<String> {
 
     @Override
     public boolean init(Expression<?>[] exprs, int matchedPattern, Kleenean isDelayed, SkriptParser.ParseResult parseResult) {
-        if (!ParserInstance.get().isCurrentEvent(BridgeEventChat.class)) {
-            Skript.error("You cannot use event-livemessage outside an LiveMessage event!");
-            return false;
-        }
+
         return true;
     }
 }
