@@ -8,31 +8,33 @@ import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.util.Kleenean;
 import com.github.twitch4j.helix.domain.Stream;
 import com.github.twitch4j.helix.domain.StreamList;
-import com.skitch.trason.addon.elements.events.bukkit.*;
+import com.skitch.trason.addon.elements.events.bukkit.BridgeEventChat;
+import com.skitch.trason.addon.elements.events.bukkit.BridgeEventGoLive;
 import org.bukkit.event.Event;
 
 import java.util.Collections;
 
 import static com.skitch.trason.addon.elements.stucture.StructTwitch.client;
 
-
-public class ExprGameTitle extends SimpleExpression<String> {
+public class ExprViewerCount extends SimpleExpression<String> {
 
     static {
-        Skript.registerExpression(ExprGameTitle.class, String.class, ExpressionType.SIMPLE, "[event-]gametitle");
+        Skript.registerExpression(ExprStreamTitle.class, String.class, ExpressionType.SIMPLE, "[event-]viewer[count]");
     }
+
     @Override
     protected String[] get(Event e) {
         if (e  instanceof BridgeEventGoLive) {
-            String gameTitle = ((BridgeEventGoLive)e).getEvent().getStream().getGameName();
-            return new String[]{gameTitle};
+            String viewerCount = ((BridgeEventGoLive)e).getEvent().getStream().getViewerCount().toString();
+            return new String[]{viewerCount};
         }
         if (e instanceof BridgeEventChat) {
             StreamList list = client.getHelix().getStreams(null, null, null, 1, null, null, null, Collections.singletonList(((BridgeEventChat) e).getEvent().getChannel().getName())).execute();
             Stream str = list.getStreams().get(0);
-            String gameTitle = str.getGameName();
-            return new String[]{gameTitle};
+            String viewerCount = str.getViewerCount().toString();
+            return new String[]{viewerCount};
         }
+
         return new String[0];
     }
 
@@ -48,7 +50,7 @@ public class ExprGameTitle extends SimpleExpression<String> {
 
     @Override
     public String toString(Event e, boolean debug) {
-        return "event-gametitle";
+        return "event-viewer";
     }
 
     @Override

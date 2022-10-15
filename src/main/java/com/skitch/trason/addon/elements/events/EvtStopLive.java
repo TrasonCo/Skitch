@@ -1,7 +1,8 @@
-package com.skitch.trason.addon.elements.events.bukkit;
+package com.skitch.trason.addon.elements.events;
 
 import ch.njol.skript.Skript;
 import ch.njol.skript.lang.util.SimpleEvent;
+import com.skitch.trason.addon.elements.events.bukkit.BridgeEventOffLive;
 
 public class EvtStopLive extends SimpleEvent {
 

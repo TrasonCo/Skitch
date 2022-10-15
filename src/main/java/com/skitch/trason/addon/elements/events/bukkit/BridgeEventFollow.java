@@ -22,7 +22,7 @@ public class BridgeEventFollow extends Event {
     @NotNull
     @Override
     public HandlerList getHandlers() {
-        return null;
+        return handlers;
     }
 
     public static HandlerList getHandlerList() { return handlers; }

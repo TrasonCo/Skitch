@@ -7,7 +7,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class BridgeEventGiftSub extends Event {
 
-    public static HandlerList getHandlerList() { return handlers; }
+
     private static final HandlerList handlers = new HandlerList();
     private final GiftSubscriptionsEvent event;
     public BridgeEventGiftSub(GiftSubscriptionsEvent event) {
@@ -23,4 +23,5 @@ public class BridgeEventGiftSub extends Event {
     public HandlerList getHandlers() {
         return handlers;
     }
+    public static HandlerList getHandlerList() { return handlers; }
 }
