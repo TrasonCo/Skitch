@@ -14,7 +14,7 @@ import org.bukkit.event.Event;
 
 import java.util.Collections;
 
-import static com.skitch.trason.addon.elements.stucture.StructTwitch.client;
+import static com.skitch.trason.addon.elements.effects.EffLoginTwitchBot.client;
 
 public class ExprLiveThumbnail extends SimpleExpression<String> {
 
@@ -25,7 +25,7 @@ public class ExprLiveThumbnail extends SimpleExpression<String> {
     @Override
     protected String[] get(Event e) {
         if (e  instanceof BridgeEventGoLive) {
-            String thumbnail = ((BridgeEventGoLive)e).getEvent().getStream().getThumbnailUrl();
+            String thumbnail = ((BridgeEventGoLive)e).getEvent().getStream().getThumbnailUrl(1280,720);
             return new String[]{thumbnail};
         }
         if (e instanceof BridgeEventChat) {

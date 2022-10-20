@@ -13,7 +13,7 @@ public class EvtFollowEvent extends SimpleEvent {
             .description("Triggered when a user follow in the given stream.",
                 "Please note that the Channels have to mention in the Login Code")
 
-            .requiredPlugins("Skript 2.6.3+ (Stucture-API)")
+            .requiredPlugins("Skript 2.6.3+")
 
 
             .examples("on twitch follow event:",

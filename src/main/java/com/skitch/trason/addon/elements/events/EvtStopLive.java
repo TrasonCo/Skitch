@@ -13,7 +13,7 @@ public class EvtStopLive extends SimpleEvent {
             .description("Called when a given Twitch channel goes Offline",
                 "Please note that the Channels have to mention in the Login Code")
 
-            .requiredPlugins("Skript 2.6.3+ (Stucture-API)")
+            .requiredPlugins("Skript 2.6.3+")
 
 
             .examples("on twitch channel goes offline:",

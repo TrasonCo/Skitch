@@ -14,7 +14,7 @@ import org.bukkit.event.Event;
 
 import java.util.Collections;
 
-import static com.skitch.trason.addon.elements.stucture.StructTwitch.client;
+import static com.skitch.trason.addon.elements.effects.EffLoginTwitchBot.client;
 
 public class ExprViewerCount extends SimpleExpression<String> {
 

@@ -7,7 +7,7 @@ import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
 import org.bukkit.event.Event;
 
-import static com.skitch.trason.addon.elements.stucture.StructTwitch.client;
+import static com.skitch.trason.addon.elements.effects.EffLoginTwitchBot.client;
 
 
 public class EffSendLiveMessage extends Effect{
