@@ -2,7 +2,7 @@ name: Skitch
 author: Trason
 description: Skript addon for Twitch-Bots
 version: @version@
-main: com.skitch.trason.addon.Skitch
+main: com.trason.skitch.Skitch
 api-version: 1.19
 softdepend:
   - Skript
