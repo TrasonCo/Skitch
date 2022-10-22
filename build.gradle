@@ -2,7 +2,7 @@ import org.apache.tools.ant.filters.ReplaceTokens
 
 apply plugin: 'java'
 
-group = 'com.skitch.trason'
+group = 'com.trason'
 version = '1.0.0'
 
 sourceCompatibility = '1.8'
