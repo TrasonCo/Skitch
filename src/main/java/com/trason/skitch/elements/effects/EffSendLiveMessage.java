@@ -34,12 +34,11 @@ public class EffSendLiveMessage extends Effect {
         // We check if the values are null, you should always do this for expression :)
         if (message == null || liveChannel == null)
             return;
-        client.getChat().sendMessage(liveChannel, message); //Variablen werden nicht gesendet
+        client.getChat().sendMessage(liveChannel, message);
     }
 
     @Override
     public String toString(Event e, boolean debug) {
-        // NEVER return null here! It's used for debugging and more, so it's important to return a valid string representing the effect.
         return "send " + exprMessage.toString(e, debug) + " to livechat " + exprLiveChannel.toString(e, debug);
     }
 
