@@ -92,6 +92,16 @@ public class SimpleEvents {
                 "\tset {_bits} to event-cheerbits",
                 "\tsend \"&a[&5TWITCH&a]&6 &a%{_suer}%&6 cheered &a%{_bits}%&6 bits to the channel &a%{_livechannel}%&r\" to console")
             .since("1.0.0");
+
+        //! On Game Change Event
+        Skript.registerEvent("Game Change Event", SimpleEvent.class, BridgeEventGameChange.class,
+                "twitch game change [event]",
+                "\tsend event-gametitle to console")
+            .description("Triggered when a game changed in the given stream.",
+                "Please note that the Channels have to mention in the Login Code")
+            .requiredPlugins("Skript 2.6.3+")
+            .examples("on twitch game change event:")
+            .since("1.0.0");
     }
 
 }
