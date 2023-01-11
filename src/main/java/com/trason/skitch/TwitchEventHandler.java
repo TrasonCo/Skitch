@@ -7,6 +7,8 @@ import com.github.twitch4j.events.ChannelGoLiveEvent;
 import com.github.twitch4j.events.ChannelGoOfflineEvent;
 import com.trason.skitch.elements.events.bukkit.*;
 import org.bukkit.*;
+import org.bukkit.event.Event;
+import org.jetbrains.annotations.NotNull;
 
 public class TwitchEventHandler {
 
@@ -16,62 +18,50 @@ public class TwitchEventHandler {
         this.plugin = plugin;
     }
 
-    @EventSubscriber
-    public void onGameTitleChange(ChannelChangeGameEvent event){
+    private void callEvent(@NotNull Event event) {
         Bukkit.getScheduler().runTask(plugin, () -> { // Call event on the main thread
-            Bukkit.getPluginManager().callEvent(new BridgeEventGameChange(event));
+            Bukkit.getPluginManager().callEvent(event);
         });
     }
 
-
+    @EventSubscriber
+    public void onGameTitleChange(ChannelChangeGameEvent event){
+        callEvent(new BridgeEventGameChange(event));
+    }
 
     @EventSubscriber
     public void onStreamUp(ChannelGoLiveEvent event) {
-        Bukkit.getScheduler().runTask(plugin, () -> { // Call event on the main thread
-            Bukkit.getPluginManager().callEvent(new BridgeEventGoLive(event));
-        });
+        callEvent(new BridgeEventGoLive(event));
     }
 
     @EventSubscriber
     public void onStreamDown(ChannelGoOfflineEvent event) {
-        Bukkit.getScheduler().runTask(plugin, () -> { // Call event on the main thread
-            Bukkit.getPluginManager().callEvent(new BridgeEventOffLive(event));
-        });
+        callEvent(new BridgeEventOffLive(event));
     }
 
     @EventSubscriber
     public void onChat(ChannelMessageEvent event) {
-        Bukkit.getScheduler().runTask(plugin, () -> { // Call event on the main thread
-            Bukkit.getPluginManager().callEvent(new BridgeEventChat(event));
-        });
+        callEvent(new BridgeEventChat(event));
     }
 
     @EventSubscriber
     public void onFollow(FollowEvent event) {
-        Bukkit.getScheduler().runTask(plugin, () -> { // Call event on the main thread
-            Bukkit.getPluginManager().callEvent(new BridgeEventFollow(event));
-        });
+        callEvent(new BridgeEventFollow(event));
     }
 
     @EventSubscriber
     public void onCheer(CheerEvent event) {
-        Bukkit.getScheduler().runTask(plugin, () -> { // Call event on the main thread
-            Bukkit.getPluginManager().callEvent(new BridgeEventCheer(event));
-        });
+        callEvent(new BridgeEventCheer(event));
     }
 
     @EventSubscriber
     public void onSub(SubscriptionEvent event) {
-        Bukkit.getScheduler().runTask(plugin, () -> { // Call event on the main thread
-            Bukkit.getPluginManager().callEvent(new BridgeEventSub(event));
-        });
+        callEvent(new BridgeEventSub(event));
      }
 
     @EventSubscriber
     public void onSubMysteryGift(GiftSubscriptionsEvent event) {
-        Bukkit.getScheduler().runTask(plugin, () -> { // Call event on the main thread
-            Bukkit.getPluginManager().callEvent(new BridgeEventGiftSub(event));
-        });
+        callEvent(new BridgeEventGiftSub(event));
     }
 
 }
