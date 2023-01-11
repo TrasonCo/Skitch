@@ -42,6 +42,8 @@ public class TwitchEventHandler {
     @EventSubscriber
     public void onChat(ChannelMessageEvent event) {
         callEvent(new BridgeEventChat(event));
+
+        SkitchCommandManager.callEvent(event);
     }
 
     @EventSubscriber
