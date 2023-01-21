@@ -3,6 +3,6 @@ author: Trason
 description: Skript addon for Twitch-Bots
 version: @version@
 main: com.trason.skitch.Skitch
-api-version: 1.13
+api-version: 1.19
 softdepend:
   - Skript
