@@ -30,7 +30,7 @@ import java.util.regex.Pattern;
 
 public final class CommandParser {
 
-    private static final Pattern commandPattern = Pattern.compile("(?i)^(on )?discord command (\\S+)(\\s+(.+))?$");
+    private static final Pattern commandPattern = Pattern.compile("(?i)^(on )?skitch command (\\S+)(\\s+(.+))?$");
     private static final Pattern argumentPattern = Pattern.compile("<\\s*(?:(.+?)\\s*:\\s*)?(.+?)\\s*(?:=\\s*(" + SkriptParser.wildcard + "))?\\s*>");
     private static final Pattern escape = Pattern.compile("[" + Pattern.quote("(|)<>%\\") + "]");
     private static final String listPattern = "\\s*,\\s*|\\s+(and|or|, )\\s+";
@@ -48,12 +48,13 @@ public final class CommandParser {
         PARSE_I = _PARSE_I;
     }
 
+    private static List<Argument<?>> currentArguments;
+
     public static @Nullable SkitchCommand parse(@NotNull SectionNode node, @NotNull SkitchScope scope) {
 
         String command = node.getKey();
-        if (command == null) {
+        if (command == null)
             return null;
-        }
 
         command = ScriptLoader.replaceOptions(command);
         Matcher matcher = commandPattern.matcher(command);
@@ -85,7 +86,7 @@ public final class CommandParser {
 
         final StringBuilder pattern = new StringBuilder();
 
-        final List<Argument<?>> currentArguments = new ArrayList<>();
+        currentArguments = new ArrayList<>();
         final Matcher m = argumentPattern.matcher(arguments);
         int lastEnd = 0;
         int optionals = 0;
@@ -135,16 +136,15 @@ public final class CommandParser {
             pattern.append(']');
 
         node.convertToEntries(0);
-        if (!(node.get("trigger") instanceof SectionNode)) {
+        if (!(node.get("trigger") instanceof SectionNode))
             return null;
-        }
 
         final SectionNode trigger = (SectionNode) node.get("trigger");
         if (trigger == null)
             return scope.error("No trigger found for command '" + command + "'", node);
 
         final String rawAliases = scope.parseEntry(node, "aliases");
-        final List<String> aliases = rawAliases == null ? new ArrayList<>() : Arrays.asList(rawAliases.split(listPattern));
+        final List<String> aliases = rawAliases == null ? new ArrayList<>() : new ArrayList<>(Arrays.asList(rawAliases.split(listPattern)));
         if (!aliases.contains(command))
             aliases.add(command);
 
@@ -170,13 +170,12 @@ public final class CommandParser {
             }
         }
 
-        String roleString = ScriptLoader.replaceOptions(node.get("roles", ""));
-        List<String> roles = roleString.isEmpty() ? null : Arrays.asList(roleString.split(listPattern));
-
         return new SkitchCommand(prefixes, aliases, command, currentArguments, ScriptLoader.loadItems(trigger), pattern.toString());
     }
 
     public static boolean parseArguments(String args, SkitchCommand command, Event event) {
+        if (args == null)
+            return true;
         SkriptParser parser = new SkriptParser(args, SkriptParser.PARSE_LITERALS, ParseContext.COMMAND);
         SkriptParser.ParseResult res = null;
         try {
@@ -197,6 +196,10 @@ public final class CommandParser {
             }
         }
         return true;
+    }
+
+    public static List<Argument<?>> getCurrentArguments() {
+        return currentArguments;
     }
 
     private static String escape(final String s) {
