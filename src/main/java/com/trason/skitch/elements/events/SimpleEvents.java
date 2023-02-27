@@ -22,7 +22,7 @@ public class SimpleEvents {
 
         //! Go Offline Event
         Skript.registerEvent("Stop Live", SimpleEvent.class, BridgeEventOffLive.class,
-                "twitch [channel] goes offline")
+                "twitch [channel] (goes|going) offline")
             .description("Called when a given Twitch channel goes Offline",
                 "Please note that the Channels have to mention in the Login Code")
             .requiredPlugins("Skript 2.6.3+")
@@ -46,7 +46,7 @@ public class SimpleEvents {
 
         //! Go Live/Online Event
         Skript.registerEvent("Going Live", SimpleEvent.class, BridgeEventGoLive.class,
-                "twitch [channel] goes live")
+                "twitch [channel] (goes|going) live")
             .description("Called when a given Twitch channel goes Live",
                 "Please note that the Channels have to mention in the Login Code")
             .requiredPlugins("Skript 2.6.3+")
