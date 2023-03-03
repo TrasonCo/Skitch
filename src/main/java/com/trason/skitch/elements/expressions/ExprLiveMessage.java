@@ -7,8 +7,16 @@ import ch.njol.skript.lang.SkriptParser.ParseResult;
 import ch.njol.skript.lang.parser.ParserInstance;
 import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.util.Kleenean;
+import com.github.twitch4j.helix.domain.Stream;
+import com.github.twitch4j.helix.domain.StreamList;
 import com.trason.skitch.elements.events.bukkit.BridgeEventChat;
+import com.trason.skitch.elements.events.bukkit.BridgeEventGoLive;
+import com.trason.skitch.elements.events.custom.CommandEvent;
 import org.bukkit.event.Event;
+
+import java.util.Collections;
+
+import static com.trason.skitch.elements.effects.EffLoginTwitchBot.client;
 
 public class ExprLiveMessage extends SimpleExpression<String> {
 
@@ -19,7 +27,7 @@ public class ExprLiveMessage extends SimpleExpression<String> {
 
     @Override
     public boolean init(Expression<?>[] exprs, int matchedPattern, Kleenean isDelayed, ParseResult parseResult) {
-        if (!ParserInstance.get().isCurrentEvent(BridgeEventChat.class)) {
+        if (!ParserInstance.get().isCurrentEvent(BridgeEventChat.class, CommandEvent.class)) {
             Skript.error("You cannot use event-livemessage outside an LiveMessage event!");
             return false;
         }
@@ -27,11 +35,17 @@ public class ExprLiveMessage extends SimpleExpression<String> {
     }
 
     @Override
-    protected
-    String[] get(Event event) {
-        return event instanceof BridgeEventChat ?
-            new String[]{((BridgeEventChat) event).getEvent().getMessage()} :
-            new String[0];
+    protected String[] get(Event event) {
+        if (event instanceof BridgeEventChat) {
+            String message = ((BridgeEventChat)event).getEvent().getMessage();
+            return new String[]{message};
+        }
+        else if (event instanceof CommandEvent) {
+            String message = ((CommandEvent)event).getEvent().getMessage();
+            return new String[]{message};
+        }
+        else
+            return new String[0];
     }
 
     @Override

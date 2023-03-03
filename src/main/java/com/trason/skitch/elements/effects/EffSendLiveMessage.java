@@ -5,6 +5,9 @@ import ch.njol.skript.lang.Effect;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser.ParseResult;
 import ch.njol.util.Kleenean;
+import com.github.twitch4j.common.util.CryptoUtils;
+import com.trason.skitch.elements.events.bukkit.BridgeEventChat;
+import com.trason.skitch.elements.events.custom.CommandEvent;
 import org.bukkit.event.Event;
 
 import static com.trason.skitch.elements.effects.EffLoginTwitchBot.client;
@@ -29,6 +32,23 @@ public class EffSendLiveMessage extends Effect {
 
     @Override
     protected void execute(Event event) {
+        if (event instanceof BridgeEventChat) {
+            String message = exprMessage.getSingle(event);
+            String liveChannel = exprLiveChannel.getSingle(event);
+            // We check if the values are null, you should always do this for expression :)
+            if (message == null || liveChannel == null)
+                return;
+            client.getChat().sendMessage(liveChannel, message);
+        }
+        else if (event instanceof CommandEvent) {
+            String message = exprMessage.getSingle(event);
+            String liveChannel = exprLiveChannel.getSingle(event);
+            // We check if the values are null, you should always do this for expression :)
+            if (message == null || liveChannel == null)
+                return;
+            client.getChat().sendMessage(liveChannel, message);
+        }
+
         String message = exprMessage.getSingle(event);
         String liveChannel = exprLiveChannel.getSingle(event);
         // We check if the values are null, you should always do this for expression :)

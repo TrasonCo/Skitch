@@ -7,6 +7,7 @@ import ch.njol.skript.lang.SkriptParser.ParseResult;
 import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.util.Kleenean;
 import com.trason.skitch.elements.events.bukkit.*;
+import com.trason.skitch.elements.events.custom.CommandEvent;
 import org.bukkit.event.Event;
 
 public class ExprLiveUser extends SimpleExpression<String> {
@@ -41,6 +42,10 @@ public class ExprLiveUser extends SimpleExpression<String> {
         }
         else if (event instanceof BridgeEventSub) {
             String user = ((BridgeEventSub) event).getEvent().getUser().getName();
+            return new String[]{user};
+        }
+        else if (event instanceof CommandEvent) {
+            String user = ((CommandEvent) event).getEvent().getUser().getName();
             return new String[]{user};
         }
         else

@@ -9,6 +9,7 @@ import ch.njol.util.Kleenean;
 import com.github.twitch4j.helix.domain.Stream;
 import com.github.twitch4j.helix.domain.StreamList;
 import com.trason.skitch.elements.events.bukkit.*;
+import com.trason.skitch.elements.events.custom.CommandEvent;
 import org.bukkit.event.Event;
 
 import java.util.Collections;
@@ -37,6 +38,14 @@ public class ExprStreamTitle extends SimpleExpression<String> {
             StreamList list = client.getHelix().getStreams(null, null, null, 1,
                 null, null, null,
                 Collections.singletonList(((BridgeEventChat) event).getEvent().getChannel().getName())).execute();
+            Stream str = list.getStreams().get(0);
+            String title = str.getTitle();
+            return new String[]{title};
+        }
+        else if (event instanceof CommandEvent) {
+            StreamList list = client.getHelix().getStreams(null, null, null, 1,
+                null, null, null,
+                Collections.singletonList(((CommandEvent) event).getEvent().getChannel().getName())).execute();
             Stream str = list.getStreams().get(0);
             String title = str.getTitle();
             return new String[]{title};

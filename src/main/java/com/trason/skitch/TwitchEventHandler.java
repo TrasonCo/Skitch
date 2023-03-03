@@ -29,6 +29,9 @@ public class TwitchEventHandler {
         callEvent(new BridgeEventGameChange(event));
     }
 
+
+
+
     @EventSubscriber
     public void onStreamUp(ChannelGoLiveEvent event) {
         callEvent(new BridgeEventGoLive(event));
@@ -42,6 +45,8 @@ public class TwitchEventHandler {
     @EventSubscriber
     public void onChat(ChannelMessageEvent event) {
         callEvent(new BridgeEventChat(event));
+
+        SkitchCommandManager.callEvent(new BridgeEventChat(event).getEvent());
     }
 
     @EventSubscriber

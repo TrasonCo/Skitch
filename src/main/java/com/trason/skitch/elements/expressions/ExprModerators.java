@@ -8,6 +8,8 @@ import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.util.Kleenean;
 import com.github.twitch4j.tmi.domain.Chatters;
 import com.trason.skitch.elements.events.bukkit.BridgeEventChat;
+import com.trason.skitch.elements.events.bukkit.BridgeEventCheer;
+import com.trason.skitch.elements.events.custom.CommandEvent;
 import org.bukkit.event.Event;
 
 import static com.trason.skitch.elements.effects.EffLoginTwitchBot.client;
@@ -21,6 +23,11 @@ public class ExprModerators extends SimpleExpression<String> {
     @Override
     protected String[] get(Event event) {
         if (event instanceof BridgeEventChat) {
+            String channelName = ((BridgeEventChat)event).getEvent().getChannel().getName();
+            Chatters chatter = client.getMessagingInterface().getChatters(channelName).execute();
+            return new String[]{String.valueOf(chatter.getModerators())};
+        }
+        else if (event instanceof CommandEvent) {
             String channelName = ((BridgeEventChat)event).getEvent().getChannel().getName();
             Chatters chatter = client.getMessagingInterface().getChatters(channelName).execute();
             return new String[]{String.valueOf(chatter.getModerators())};

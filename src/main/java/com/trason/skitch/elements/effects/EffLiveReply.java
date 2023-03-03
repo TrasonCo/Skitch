@@ -7,6 +7,7 @@ import ch.njol.skript.lang.SkriptParser.ParseResult;
 import ch.njol.util.Kleenean;
 import com.github.twitch4j.common.util.CryptoUtils;
 import com.trason.skitch.elements.events.bukkit.BridgeEventChat;
+import com.trason.skitch.elements.events.custom.CommandEvent;
 import org.bukkit.event.Event;
 
 import static com.trason.skitch.elements.effects.EffLoginTwitchBot.client;
@@ -29,12 +30,23 @@ public class EffLiveReply extends Effect {
 
     @Override
     protected void execute(Event event) {
-        String message = exprMessage.getSingle(event);
-        String channel = ((BridgeEventChat) event).getEvent().getChannel().getName();
-        // We check if the values are null, you should always do this for expression :)
-        if (message == null)
-            return;
-        client.getChat().sendMessage(((BridgeEventChat) event).getEvent().getChannel().getName(), message, CryptoUtils.generateNonce(32), ((BridgeEventChat) event).getEvent().getMessageEvent().getMessageId().orElse(null)); //Variablen werden nicht gesendet
+        if (event instanceof BridgeEventChat) {
+            String message = exprMessage.getSingle(event);
+            String channel = ((BridgeEventChat) event).getEvent().getChannel().getName();
+            if (message == null)
+                return;
+            client.getChat().sendMessage(((BridgeEventChat) event).getEvent().getChannel().getName(), message, CryptoUtils.generateNonce(32), ((BridgeEventChat) event).getEvent().getMessageEvent().getMessageId().orElse(null));
+        }
+        else if (event instanceof CommandEvent) {
+            String message = exprMessage.getSingle(event);
+            String channel = ((CommandEvent) event).getEvent().getChannel().getName();
+            // We check if the values are null, you should always do this for expression :)
+            if (message == null)
+                return;
+            client.getChat().sendMessage(((CommandEvent) event).getEvent().getChannel().getName(), message, CryptoUtils.generateNonce(32), ((CommandEvent) event).getEvent().getMessageEvent().getMessageId().orElse(null));
+
+        }
+
     }
 
     @Override

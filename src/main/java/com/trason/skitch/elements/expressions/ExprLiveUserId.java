@@ -7,13 +7,14 @@ import ch.njol.skript.lang.SkriptParser.ParseResult;
 import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.util.Kleenean;
 import com.trason.skitch.elements.events.bukkit.*;
+import com.trason.skitch.elements.events.custom.CommandEvent;
 import org.bukkit.event.Event;
 
 public class ExprLiveUserId extends SimpleExpression<String> {
 
     static {
         Skript.registerExpression(ExprLiveUserId.class, String.class, ExpressionType.SIMPLE,
-            "[event-]liveuserid");
+            "twitch id (from|of) %string%");
     }
 
     @Override
@@ -41,6 +42,10 @@ public class ExprLiveUserId extends SimpleExpression<String> {
         }
         else if (event instanceof BridgeEventSub) {
             String user = ((BridgeEventSub) event).getEvent().getUser().getId();
+            return new String[]{user};
+        }
+        else if (event instanceof CommandEvent) {
+            String user = ((CommandEvent) event).getEvent().getUser().getId();
             return new String[]{user};
         }
         else

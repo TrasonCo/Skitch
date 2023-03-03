@@ -16,6 +16,13 @@ public final class Skitch extends JavaPlugin {
 
     @Override
     public void onEnable() {
+
+        // All you have to do is adding the following two lines in your onEnable method.
+        int pluginId = 17842; // <-- Replace with the id of your plugin!
+        Metrics metrics = new Metrics(this, pluginId);
+
+
+
         instance = this;
         addon = Skript.registerAddon(this);
         try {

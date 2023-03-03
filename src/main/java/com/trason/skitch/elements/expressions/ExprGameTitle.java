@@ -9,6 +9,7 @@ import ch.njol.util.Kleenean;
 import com.github.twitch4j.helix.domain.Stream;
 import com.github.twitch4j.helix.domain.StreamList;
 import com.trason.skitch.elements.events.bukkit.*;
+import com.trason.skitch.elements.events.custom.CommandEvent;
 import org.bukkit.event.Event;
 
 import java.util.Collections;
@@ -36,6 +37,12 @@ public class ExprGameTitle extends SimpleExpression<String> {
         }
         else if (event instanceof BridgeEventChat) {
             StreamList list = client.getHelix().getStreams(null, null, null, 1, null, null, null, Collections.singletonList(((BridgeEventChat) event).getEvent().getChannel().getName())).execute();
+            Stream str = list.getStreams().get(0);
+            String gameTitle = str.getGameName();
+            return new String[]{gameTitle};
+        }
+        else if (event instanceof CommandEvent) {
+            StreamList list = client.getHelix().getStreams(null, null, null, 1, null, null, null, Collections.singletonList(((CommandEvent) event).getEvent().getChannel().getName())).execute();
             Stream str = list.getStreams().get(0);
             String gameTitle = str.getGameName();
             return new String[]{gameTitle};

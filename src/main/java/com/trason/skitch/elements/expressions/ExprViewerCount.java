@@ -10,6 +10,7 @@ import com.github.twitch4j.helix.domain.Stream;
 import com.github.twitch4j.helix.domain.StreamList;
 import com.trason.skitch.elements.events.bukkit.BridgeEventChat;
 import com.trason.skitch.elements.events.bukkit.BridgeEventGoLive;
+import com.trason.skitch.elements.events.custom.CommandEvent;
 import org.bukkit.event.Event;
 
 import java.util.Collections;
@@ -19,7 +20,7 @@ import static com.trason.skitch.elements.effects.EffLoginTwitchBot.client;
 public class ExprViewerCount extends SimpleExpression<String> {
 
     static {
-        Skript.registerExpression(ExprStreamTitle.class, String.class, ExpressionType.SIMPLE,
+        Skript.registerExpression(ExprViewerCount.class, String.class, ExpressionType.SIMPLE,
             "[event-]viewer[count]");
     }
 
@@ -36,6 +37,12 @@ public class ExprViewerCount extends SimpleExpression<String> {
         }
         else if (event instanceof BridgeEventChat) {
             StreamList list = client.getHelix().getStreams(null, null, null, 1, null, null, null, Collections.singletonList(((BridgeEventChat) event).getEvent().getChannel().getName())).execute();
+            Stream str = list.getStreams().get(0);
+            String viewerCount = str.getViewerCount().toString();
+            return new String[]{viewerCount};
+        }
+        else if (event instanceof CommandEvent) {
+            StreamList list = client.getHelix().getStreams(null, null, null, 1, null, null, null, Collections.singletonList(((CommandEvent) event).getEvent().getChannel().getName())).execute();
             Stream str = list.getStreams().get(0);
             String viewerCount = str.getViewerCount().toString();
             return new String[]{viewerCount};

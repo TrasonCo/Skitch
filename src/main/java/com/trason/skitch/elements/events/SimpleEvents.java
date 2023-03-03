@@ -102,6 +102,7 @@ public class SimpleEvents {
             .requiredPlugins("Skript 2.6.3+")
             .examples("on twitch game change event:")
             .since("1.0.0");
+
     }
 
 }
