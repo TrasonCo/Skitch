@@ -32,7 +32,7 @@ Overall, Skitch is a powerful tool for Minecraft server owners and administrator
 
 ## Support
 
-[![Discord Server](https://discordapp.com/api/guilds/530420516276666379/embed.png?style=banner2)](https://discord.gg/AwFBkQj57c)
+[![Discord Server](https://discordapp.com/api/guilds/506878804426358784/embed.png?style=banner2)](https://discord.gg/AwFBkQj57c)
 
 
 ## API Used
