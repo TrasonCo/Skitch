@@ -1,6 +1,9 @@
 package com.trason.skitch.elements.expressions;
 
 import ch.njol.skript.Skript;
+import ch.njol.skript.doc.Description;
+import ch.njol.skript.doc.Examples;
+import ch.njol.skript.doc.Name;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.ExpressionType;
 import ch.njol.skript.lang.SkriptParser.ParseResult;
@@ -9,6 +12,11 @@ import ch.njol.util.Kleenean;
 import com.trason.skitch.elements.events.bukkit.*;
 import com.trason.skitch.elements.events.custom.CommandEvent;
 import org.bukkit.event.Event;
+
+@Name("Live User ID")
+@Description("Returns the user ID of the event.")
+@Examples("on twitch cheer:\n" +
+        "\tbroadcast \"%event-liveuserid%\"")
 
 public class ExprLiveUserId extends SimpleExpression<String> {
 

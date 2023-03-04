@@ -1,6 +1,9 @@
 package com.trason.skitch.elements.expressions;
 
 import ch.njol.skript.Skript;
+import ch.njol.skript.doc.Description;
+import ch.njol.skript.doc.Examples;
+import ch.njol.skript.doc.Name;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.ExpressionType;
 import ch.njol.skript.lang.SkriptParser.ParseResult;
@@ -8,6 +11,12 @@ import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.util.Kleenean;
 import com.trason.skitch.elements.events.bukkit.*;
 import org.bukkit.event.Event;
+
+
+@Name("Gift Sub Amount")
+@Description("Returns the amount of subs gifted in a gift sub event")
+@Examples("on twitch giftsub:\n" +
+        "\tbroadcast \"%event-subamount%\"")
 
 public class ExprGiftSubAmount extends SimpleExpression<String> {
 

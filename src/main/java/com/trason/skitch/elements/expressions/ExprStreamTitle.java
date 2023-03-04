@@ -1,6 +1,9 @@
 package com.trason.skitch.elements.expressions;
 
 import ch.njol.skript.Skript;
+import ch.njol.skript.doc.Description;
+import ch.njol.skript.doc.Examples;
+import ch.njol.skript.doc.Name;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.ExpressionType;
 import ch.njol.skript.lang.SkriptParser.ParseResult;
@@ -15,6 +18,11 @@ import org.bukkit.event.Event;
 import java.util.Collections;
 
 import static com.trason.skitch.elements.effects.EffLoginTwitchBot.client;
+
+@Name("Stream Title")
+@Description("Returns the title of the stream.")
+@Examples("on twitch message:\n" +
+        "\tbroadcast \"%event-streamtitle%\"")
 
 public class ExprStreamTitle extends SimpleExpression<String> {
 
@@ -50,6 +58,31 @@ public class ExprStreamTitle extends SimpleExpression<String> {
             String title = str.getTitle();
             return new String[]{title};
         }
+        else if (event instanceof BridgeEventFollow) {
+            StreamList list = client.getHelix().getStreams(null, null, null, 1,
+                null, null, null,
+                Collections.singletonList(((BridgeEventFollow) event).getEvent().getChannel().getName())).execute();
+            Stream str = list.getStreams().get(0);
+            String title = str.getTitle();
+            return new String[]{title};
+        }
+        else if (event instanceof BridgeEventSub) {
+            StreamList list = client.getHelix().getStreams(null, null, null, 1,
+                null, null, null,
+                Collections.singletonList(((BridgeEventSub) event).getEvent().getChannel().getName())).execute();
+            Stream str = list.getStreams().get(0);
+            String title = str.getTitle();
+            return new String[]{title};
+        }
+        else if (event instanceof BridgeEventGiftSub) {
+            StreamList list = client.getHelix().getStreams(null, null, null, 1,
+                null, null, null,
+                Collections.singletonList(((BridgeEventGiftSub) event).getEvent().getChannel().getName())).execute();
+            Stream str = list.getStreams().get(0);
+            String title = str.getTitle();
+            return new String[]{title};
+        }
+
         else
             return new String[0];
     }

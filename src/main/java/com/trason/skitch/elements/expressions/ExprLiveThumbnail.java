@@ -1,6 +1,9 @@
 package com.trason.skitch.elements.expressions;
 
 import ch.njol.skript.Skript;
+import ch.njol.skript.doc.Description;
+import ch.njol.skript.doc.Examples;
+import ch.njol.skript.doc.Name;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.ExpressionType;
 import ch.njol.skript.lang.SkriptParser.ParseResult;
@@ -16,6 +19,11 @@ import java.util.Collections;
 import java.util.concurrent.TimeUnit;
 
 import static com.trason.skitch.elements.effects.EffLoginTwitchBot.client;
+
+@Name("Live Thumbnail")
+@Description("Returns the thumbnail of the event as URL.")
+@Examples("on twitch message:\n" +
+        "\tbroadcast \"%event-livethumbnail%\"")
 
 public class ExprLiveThumbnail extends SimpleExpression<String> {
 

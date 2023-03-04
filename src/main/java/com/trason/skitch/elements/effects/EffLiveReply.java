@@ -1,6 +1,9 @@
 package com.trason.skitch.elements.effects;
 
 import ch.njol.skript.Skript;
+import ch.njol.skript.doc.Description;
+import ch.njol.skript.doc.Examples;
+import ch.njol.skript.doc.Name;
 import ch.njol.skript.lang.Effect;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser.ParseResult;
@@ -12,7 +15,9 @@ import org.bukkit.event.Event;
 
 import static com.trason.skitch.elements.effects.EffLoginTwitchBot.client;
 
-// Not sure if you wanted to add documentation here or not ! ^-^
+@Name("Twitch Reply")
+@Description("Reply to a twitch chat message")
+@Examples("twitch reply with \"Hello!\"")
 public class EffLiveReply extends Effect {
 
     static {

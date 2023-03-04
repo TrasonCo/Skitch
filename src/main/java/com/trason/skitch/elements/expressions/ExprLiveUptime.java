@@ -1,6 +1,9 @@
 package com.trason.skitch.elements.expressions;
 
 import ch.njol.skript.Skript;
+import ch.njol.skript.doc.Description;
+import ch.njol.skript.doc.Examples;
+import ch.njol.skript.doc.Name;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.ExpressionType;
 import ch.njol.skript.lang.SkriptParser.ParseResult;
@@ -14,6 +17,11 @@ import org.bukkit.event.Event;
 import java.util.Collections;
 
 import static com.trason.skitch.elements.effects.EffLoginTwitchBot.client;
+
+@Name("Live Uptime")
+@Description("Returns the uptime of the event.")
+@Examples("on twitch message:\n" +
+        "\tbroadcast \"%event-liveuptime%\"")
 
 public class ExprLiveUptime extends SimpleExpression<String> {
 

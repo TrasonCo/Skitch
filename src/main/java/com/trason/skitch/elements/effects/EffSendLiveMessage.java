@@ -1,6 +1,9 @@
 package com.trason.skitch.elements.effects;
 
 import ch.njol.skript.Skript;
+import ch.njol.skript.doc.Description;
+import ch.njol.skript.doc.Examples;
+import ch.njol.skript.doc.Name;
 import ch.njol.skript.lang.Effect;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser.ParseResult;
@@ -12,7 +15,10 @@ import org.bukkit.event.Event;
 
 import static com.trason.skitch.elements.effects.EffLoginTwitchBot.client;
 
-// Not sure if you wanted to add documentation here or not ! ^-^
+@Name("Twitch Bot Send Live Message")
+@Description({"This is to send a message to your Twitch Live Chat"})
+@Examples({"on command /test:",
+        "\tsend \"Hello World!\" to the livechat \"trason\""})
 public class EffSendLiveMessage extends Effect {
 
     static {

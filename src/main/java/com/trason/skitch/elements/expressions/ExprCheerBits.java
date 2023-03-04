@@ -1,6 +1,9 @@
 package com.trason.skitch.elements.expressions;
 
 import ch.njol.skript.Skript;
+import ch.njol.skript.doc.Description;
+import ch.njol.skript.doc.Examples;
+import ch.njol.skript.doc.Name;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.ExpressionType;
 import ch.njol.skript.lang.SkriptParser.ParseResult;
@@ -12,7 +15,10 @@ import org.bukkit.event.Event;
 
 
 
-
+@Name("Cheer Bits")
+@Description("Returns the amount of bits cheered in a cheer event.")
+@Examples("on twitch cheer:\n" +
+        "\tbroadcast \"%event-cheerbits%\"")
 public class ExprCheerBits extends SimpleExpression<String> {
 
     static {

@@ -1,6 +1,9 @@
 package com.trason.skitch.elements.expressions;
 
 import ch.njol.skript.Skript;
+import ch.njol.skript.doc.Description;
+import ch.njol.skript.doc.Examples;
+import ch.njol.skript.doc.Name;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.ExpressionType;
 import ch.njol.skript.lang.SkriptParser.ParseResult;
@@ -9,6 +12,7 @@ import ch.njol.util.Kleenean;
 import com.github.twitch4j.helix.domain.Stream;
 import com.github.twitch4j.helix.domain.StreamList;
 import com.trason.skitch.elements.events.bukkit.BridgeEventChat;
+import com.trason.skitch.elements.events.bukkit.BridgeEventFollow;
 import com.trason.skitch.elements.events.bukkit.BridgeEventGoLive;
 import com.trason.skitch.elements.events.custom.CommandEvent;
 import org.bukkit.event.Event;
@@ -16,6 +20,11 @@ import org.bukkit.event.Event;
 import java.util.Collections;
 
 import static com.trason.skitch.elements.effects.EffLoginTwitchBot.client;
+
+@Name("Viewer Count")
+@Description("Returns the viewer count of the Channel when he is Live!.")
+@Examples("on twitch message:\n" +
+        "\tbroadcast \"%event-viewercount%\"")
 
 public class ExprViewerCount extends SimpleExpression<String> {
 
@@ -41,6 +50,13 @@ public class ExprViewerCount extends SimpleExpression<String> {
             String viewerCount = str.getViewerCount().toString();
             return new String[]{viewerCount};
         }
+        else if (event instanceof BridgeEventFollow) {
+            StreamList list = client.getHelix().getStreams(null, null, null, 1, null, null, null, Collections.singletonList(((BridgeEventFollow) event).getEvent().getChannel().getName())).execute();
+            Stream str = list.getStreams().get(0);
+            String viewerCount = str.getViewerCount().toString();
+            return new String[]{viewerCount};
+        }
+
         else if (event instanceof CommandEvent) {
             StreamList list = client.getHelix().getStreams(null, null, null, 1, null, null, null, Collections.singletonList(((CommandEvent) event).getEvent().getChannel().getName())).execute();
             Stream str = list.getStreams().get(0);
