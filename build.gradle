@@ -5,8 +5,8 @@ apply plugin: 'java'
 group = 'com.trason'
 version = '1.2.0'
 
-sourceCompatibility = '1.8'
-targetCompatibility = '1.8'
+sourceCompatibility = "11"
+targetCompatibility = "11"
 
 // Repositories
 repositories {
