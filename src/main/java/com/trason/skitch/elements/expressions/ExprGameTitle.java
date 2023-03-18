@@ -20,7 +20,8 @@ import java.util.Collections;
 import static com.trason.skitch.elements.effects.EffLoginTwitchBot.client;
 
 @Name("Game Title")
-@Description("Returns the game title of the streamer.")
+@Description("Returns the game title of the streamer."
+    + " If the streamer is not currently streaming, it will NOT work")
 @Examples("set {_game} to event-gametitle")
 
 public class ExprGameTitle extends SimpleExpression<String> {
