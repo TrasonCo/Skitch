@@ -42,7 +42,6 @@ public class ExprUserImageUrl extends SimpleExpression<String>{
     protected String[] get(Event event) {
         if (event instanceof BridgeEventChat) {
             Integer userid = Integer.valueOf(((BridgeEventChat) event).getEvent().getUser().getId());
-            HystrixCommand<GameList> rl = client.getHelix().getGames(null, Arrays.asList("dfhdfhgd"), null, null);
             UserList list = client.getHelix().getUsers(null, Arrays.asList(String.valueOf(userid)), null).execute();
             String userImageUrl = list.getUsers().get(0).getProfileImageUrl();
             return new String[]{userImageUrl};
