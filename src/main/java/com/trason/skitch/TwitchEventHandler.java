@@ -29,6 +29,10 @@ public class TwitchEventHandler {
         callEvent(new BridgeEventGameChange(event));
     }
 
+    @EventSubscriber
+    public void onRaid(RaidEvent event) {
+        callEvent(new BridgeEventRaid(event));
+    }
 
 
 
@@ -68,5 +72,7 @@ public class TwitchEventHandler {
     public void onSubMysteryGift(GiftSubscriptionsEvent event) {
         callEvent(new BridgeEventGiftSub(event));
     }
+
+
 
 }

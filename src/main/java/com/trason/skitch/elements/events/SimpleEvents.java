@@ -103,6 +103,19 @@ public class SimpleEvents {
             .examples("on twitch game change event:")
             .since("1.0.0");
 
+        //! On Raid Event
+        Skript.registerEvent("Raid Event", SimpleEvent.class, BridgeEventRaid.class,
+                "twitch raid [event]")
+            .description("Triggered when a user raid in the given stream.",
+                "Please note that the Channels have to mention in the Login Code")
+            .requiredPlugins("Skript 2.6.3+")
+            .examples("on twitch raid event:",
+                "\tset {_channel} to event-livechannel",
+                "\tset {_user} to event-liveuser",
+                "\tset {_viewers} to event-raidviewers",
+                "\tsend \"&a[&5TWITCH&a]&6 &a%{_user}%&6 raided the channel &a%{_livechannel}%&6 with &a%{_viewers}%&6 viewers&r\" to console")
+            .since("1.0.0");
+
     }
 
 }
