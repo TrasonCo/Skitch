@@ -55,12 +55,6 @@ public class EffSendLiveMessage extends Effect {
             client.getChat().sendMessage(liveChannel, message);
         }
 
-        String message = exprMessage.getSingle(event);
-        String liveChannel = exprLiveChannel.getSingle(event);
-        // We check if the values are null, you should always do this for expression :)
-        if (message == null || liveChannel == null)
-            return;
-        client.getChat().sendMessage(liveChannel, message);
     }
 
     @Override

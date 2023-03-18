@@ -22,7 +22,7 @@ public class ExprLiveUserId extends SimpleExpression<String> {
 
     static {
         Skript.registerExpression(ExprLiveUserId.class, String.class, ExpressionType.SIMPLE,
-            "twitch id (from|of) %string%");
+            "[event-]liveuserid");
     }
 
     @Override
