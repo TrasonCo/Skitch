@@ -7,12 +7,20 @@ import ch.njol.skript.lang.SkriptParser;
 import ch.njol.skript.lang.parser.ParserInstance;
 import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.util.Kleenean;
+import com.github.philippheuer.credentialmanager.domain.OAuth2Credential;
+import com.github.twitch4j.auth.providers.TwitchIdentityProvider;
+import com.github.twitch4j.helix.domain.Chatter;
 import com.github.twitch4j.helix.domain.ChattersList;
 import com.trason.skitch.elements.events.bukkit.BridgeEventChat;
 import com.trason.skitch.elements.events.custom.CommandEvent;
 import org.bukkit.event.Event;
 
-import static com.trason.skitch.elements.effects.EffLoginTwitchBot.client;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import static com.trason.skitch.elements.effects.EffLoginTwitchBot.*;
 
 public class ExprChatters extends SimpleExpression<String> {
 
@@ -24,15 +32,19 @@ public class ExprChatters extends SimpleExpression<String> {
     protected String[] get(Event event) {
         if (event instanceof BridgeEventChat) {
             String channelID = ((BridgeEventChat)event).getEvent().getChannel().getId();
-            String userID = ((BridgeEventChat) event).getEvent().getUser().getId();
-            ChattersList chatter = client.getHelix().getChatters(null,channelID,userID,null,null).execute();
-            return new String[]{String.valueOf(chatter.getChatters())};
+            OAuth2Credential chatAccount = new OAuth2Credential("twitch", clientOaToken);
+            String BotId = new TwitchIdentityProvider(null, null, null).getAdditionalCredentialInformation(chatAccount).get().getUserId();
+            ChattersList chatter = client.getHelix().getChatters(null,channelID,BotId,null,null).execute();
+            String[] chatters = chatter.getChatters().stream().map(Chatter::getUserName).toArray(String[]::new);
+            return chatters;
         }
         else if (event instanceof CommandEvent) {
             String channelID = ((CommandEvent)event).getEvent().getChannel().getId();
-            String userID = ((CommandEvent) event).getEvent().getUser().getId();
-            ChattersList chatter = client.getHelix().getChatters(null,channelID,userID,null,null).execute();
-            return new String[]{String.valueOf(chatter.getChatters())};
+            OAuth2Credential chatAccount = new OAuth2Credential("twitch", clientOaToken);
+            String BotId = new TwitchIdentityProvider(null, null, null).getAdditionalCredentialInformation(chatAccount).get().getUserId();
+            ChattersList chatter = client.getHelix().getChatters(null,channelID,BotId,null,null).execute();
+            String[] chatters = chatter.getChatters().stream().map(Chatter::getUserName).toArray(String[]::new);
+            return chatters;
         }
 
         else

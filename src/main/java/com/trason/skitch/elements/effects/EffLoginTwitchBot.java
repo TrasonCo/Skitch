@@ -29,11 +29,14 @@ public class EffLoginTwitchBot extends Effect {
     }
 
     public static TwitchClient client;
+    public static String clientOaToken;
+
 
     private Expression<String> exprClientId;
     private Expression<String> exprClientToken;
     private Expression<String> exprClientSecret;
     private Expression<String> exprClientChannel;
+
 
     @SuppressWarnings("unchecked")
     @Override
@@ -50,6 +53,7 @@ public class EffLoginTwitchBot extends Effect {
         String clientId = exprClientId.getSingle(event);
         String clientSecret = exprClientSecret.getSingle(event);
         String clientToken = exprClientToken.getSingle(event);
+
         String clientChannel = exprClientChannel.getSingle(event);
         if (clientId == null || clientSecret == null || clientToken == null || clientChannel == null)
             return;
@@ -61,13 +65,19 @@ public class EffLoginTwitchBot extends Effect {
             client.getEventManager().close();
             client.close();
         }
+
+
+
+
         OAuth2Credential credential = StringUtils.isNotBlank(clientToken) ?
             new OAuth2Credential("twitch", clientToken) :
             null;
+        clientOaToken = clientToken;
         EffLoginTwitchBot.client = TwitchClientBuilder.builder()
             .withClientId(clientId)
             .withClientSecret(clientSecret)
             .withEnableChat(true)
+            .withEnableTMI(true)
             .withChatAccount(credential)
             .withEnableHelix(true)
             .withDefaultAuthToken(credential)
