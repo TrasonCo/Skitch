@@ -116,6 +116,18 @@ public class SimpleEvents {
                 "\tsend \"&a[&5TWITCH&a]&6 &a%{_user}%&6 raided the channel &a%{_livechannel}%&6 with &a%{_viewers}%&6 viewers&r\" to console")
             .since("1.0.0");
 
+        //! On CustomReward Event
+        Skript.registerEvent("Custom Reward Event", SimpleEvent.class, BridgeEventRewards.class,
+                "twitch custom reward [event]")
+            .description("Triggered when a user redeem a custom reward in the given stream.",
+                "Please note that the Channels have to mention in the Login Code")
+            .requiredPlugins("Skript 2.6.3+")
+            .examples("on twitch custom reward event:",
+                "\tset {_channel} to event-livechannel",
+                "\tset {_user} to event-liveuser",
+                "\tset {_reward} to event-rewardtitle",
+                "\tsend \"&a[&5TWITCH&a]&6 &a%{_user}%&6 redeemed the reward &a%{_reward}%&6 in the channel &a%{_livechannel}%&r\" to console")
+            .since("1.0.0");
     }
 
 }
