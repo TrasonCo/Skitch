@@ -15,10 +15,6 @@ import com.trason.skitch.elements.events.bukkit.BridgeEventChat;
 import com.trason.skitch.elements.events.custom.CommandEvent;
 import org.bukkit.event.Event;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import static com.trason.skitch.elements.effects.EffLoginTwitchBot.*;
 
