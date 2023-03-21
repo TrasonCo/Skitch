@@ -10,11 +10,15 @@ import com.github.philippheuer.credentialmanager.domain.OAuth2Credential;
 import com.github.philippheuer.events4j.simple.SimpleEventHandler;
 import com.github.twitch4j.TwitchClient;
 import com.github.twitch4j.TwitchClientBuilder;
+import com.github.twitch4j.helix.domain.User;
+import com.github.twitch4j.helix.domain.UserList;
 import com.trason.skitch.Skitch;
 import com.trason.skitch.TwitchEventHandler;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.event.Event;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 @Name("Twitch Bot Login")
 @Description({"This is to login your Twitch Bot Account"})
@@ -77,6 +81,7 @@ public class EffLoginTwitchBot extends Effect {
             .withClientId(clientId)
             .withClientSecret(clientSecret)
             .withEnableChat(true)
+            .withEnablePubSub(true)
             .withEnableTMI(true)
             .withChatAccount(credential)
             .withEnableHelix(true)
@@ -85,6 +90,16 @@ public class EffLoginTwitchBot extends Effect {
 
         for (String channel : clientChannels)
             client.getChat().joinChannel(String.valueOf(channel));
+
+        for (String channel : clientChannels) {
+            List<User> userName = client.getHelix().getUsers(null, null, Collections.singletonList(channel)).execute().getUsers();
+            String userId = userName.get(0).getId();
+            client.getPubSub().listenForChannelPointsRedemptionEvents(null, userId);
+        }
+
+
+        // Enable Event Listeners
+
 
         client.getClientHelper().enableFollowEventListener(Arrays.asList(clientChannels));
         client.getClientHelper().enableStreamEventListener(Arrays.asList(clientChannels));
