@@ -41,7 +41,6 @@ public class EffSendLiveMessage extends Effect {
         if (event instanceof BridgeEventChat) {
             String message = exprMessage.getSingle(event);
             String liveChannel = exprLiveChannel.getSingle(event);
-            // We check if the values are null, you should always do this for expression :)
             if (message == null || liveChannel == null)
                 return;
             client.getChat().sendMessage(liveChannel, message);
@@ -49,12 +48,17 @@ public class EffSendLiveMessage extends Effect {
         else if (event instanceof CommandEvent) {
             String message = exprMessage.getSingle(event);
             String liveChannel = exprLiveChannel.getSingle(event);
-            // We check if the values are null, you should always do this for expression :)
             if (message == null || liveChannel == null)
                 return;
             client.getChat().sendMessage(liveChannel, message);
         }
-
+        else {
+            String message = exprMessage.getSingle(event);
+            String liveChannel = exprLiveChannel.getSingle(event);
+            if (message == null || liveChannel == null)
+                return;
+            client.getChat().sendMessage(liveChannel, message);
+        }
     }
 
     @Override
