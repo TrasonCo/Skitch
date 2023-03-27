@@ -8,7 +8,6 @@ import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.ExpressionType;
 import ch.njol.skript.lang.SkriptParser.ParseResult;
 import ch.njol.skript.lang.util.SimpleExpression;
-import ch.njol.skript.log.Verbosity;
 import ch.njol.util.Kleenean;
 import com.github.twitch4j.helix.domain.Stream;
 import com.github.twitch4j.helix.domain.StreamList;
@@ -17,8 +16,6 @@ import com.trason.skitch.elements.events.bukkit.BridgeEventFollow;
 import com.trason.skitch.elements.events.bukkit.BridgeEventGoLive;
 import com.trason.skitch.elements.events.custom.CommandEvent;
 import org.bukkit.event.Event;
-
-import java.io.Console;
 import java.util.Collections;
 
 import static com.trason.skitch.elements.effects.EffLoginTwitchBot.client;
