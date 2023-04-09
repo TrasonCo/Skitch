@@ -52,6 +52,10 @@ public class ExprLiveUser extends SimpleExpression<String> {
             String user = ((BridgeEventSub) event).getEvent().getUser().getName();
             return new String[]{user};
         }
+        else if (event instanceof BridgeEventRewards) {
+            String user = ((BridgeEventRewards) event).getEvent().getRedemption().getUser().getDisplayName();
+            return new String[]{user};
+        }
         else if (event instanceof CommandEvent) {
             String user = ((CommandEvent) event).getEvent().getUser().getName();
             return new String[]{user};

@@ -60,6 +60,7 @@ public class ExprLiveChannel extends SimpleExpression<String> {
             String channel = ((BridgeEventSub) event).getEvent().getChannel().getName();
             return new String[]{channel};
         }
+
         else if (event instanceof CommandEvent) {
             String channel = ((CommandEvent) event).getEvent().getChannel().getName();
             return new String[]{channel};

@@ -1,21 +1,20 @@
 package com.trason.skitch.elements.events.bukkit;
 
-import com.github.twitch4j.pubsub.events.RewardRedeemedEvent;
+import com.github.twitch4j.pubsub.events.PredictionUpdatedEvent;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 import org.jetbrains.annotations.NotNull;
 
-public class BridgeEventRewards extends Event {
-
+public class BridgeEventPrediction extends Event {
     private static final HandlerList handlers = new HandlerList();
-    private final RewardRedeemedEvent event;
+    private final PredictionUpdatedEvent event;
 
 
-    public BridgeEventRewards(RewardRedeemedEvent event) {
+    public BridgeEventPrediction(PredictionUpdatedEvent event) {
         this.event = event;
     }
 
-    public RewardRedeemedEvent getEvent() {
+    public PredictionUpdatedEvent getEvent() {
         return event;
     }
     @NotNull

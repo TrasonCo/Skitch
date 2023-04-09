@@ -5,12 +5,8 @@ import com.github.twitch4j.chat.events.channel.*;
 import com.github.twitch4j.events.ChannelChangeGameEvent;
 import com.github.twitch4j.events.ChannelGoLiveEvent;
 import com.github.twitch4j.events.ChannelGoOfflineEvent;
-import com.github.twitch4j.eventsub.events.ChannelPointsCustomRewardEvent;
-import com.github.twitch4j.pubsub.domain.ChannelPointsRedemption;
-import com.github.twitch4j.pubsub.events.ChannelPointsRedemptionEvent;
-import com.github.twitch4j.pubsub.events.CustomRewardCreatedEvent;
+import com.github.twitch4j.pubsub.events.PredictionUpdatedEvent;
 import com.github.twitch4j.pubsub.events.RewardRedeemedEvent;
-import com.github.twitch4j.pubsub.events.UpdateRedemptionFinishedEvent;
 import com.trason.skitch.elements.events.bukkit.*;
 import org.bukkit.*;
 import org.bukkit.event.Event;
@@ -43,6 +39,13 @@ public class TwitchEventHandler {
     @EventSubscriber
     public void onChannelPointsRedemption(RewardRedeemedEvent event) {
         callEvent(new BridgeEventRewards(event));
+    }
+
+    @EventSubscriber
+    public void onPredictionEvent(PredictionUpdatedEvent event) {
+        if ("RESOLVED".equalsIgnoreCase(event.getEvent().getStatus())) {
+            callEvent(new BridgeEventPrediction(event));
+        }
     }
 
 

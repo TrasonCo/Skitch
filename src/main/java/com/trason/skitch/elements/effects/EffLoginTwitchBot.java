@@ -1,8 +1,6 @@
 package com.trason.skitch.elements.effects;
 
-import ch.njol.skript.Skript;
 import ch.njol.skript.doc.*;
-import ch.njol.skript.lang.Effect;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser.ParseResult;
 import ch.njol.util.Kleenean;
@@ -11,9 +9,9 @@ import com.github.philippheuer.events4j.simple.SimpleEventHandler;
 import com.github.twitch4j.TwitchClient;
 import com.github.twitch4j.TwitchClientBuilder;
 import com.github.twitch4j.helix.domain.User;
-import com.github.twitch4j.helix.domain.UserList;
 import com.trason.skitch.Skitch;
 import com.trason.skitch.TwitchEventHandler;
+import com.trason.skitch.util.AsyncEffect;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.event.Event;
 import java.util.Arrays;
@@ -26,10 +24,10 @@ import java.util.List;
     "\ttwitch login to client %string% with token %string% with secret %string% to overview %string%",})
 @Since("1.0.0")
 @RequiredPlugins("Skript 2.6.3+")
-public class EffLoginTwitchBot extends Effect {
+public class EffLoginTwitchBot extends AsyncEffect {
 
     static {
-        Skript.registerEffect(EffLoginTwitchBot.class, "twitch login to client %string% with token %string% with secret %string% to overview %string%");
+        registerAsyncEffect(EffLoginTwitchBot.class, "twitch login to client %string% with token %string% with secret %string% to overview %string%");
     }
 
     public static TwitchClient client;
@@ -44,7 +42,7 @@ public class EffLoginTwitchBot extends Effect {
 
     @SuppressWarnings("unchecked")
     @Override
-    public boolean init(Expression<?>[] exprs, int matchedPattern, Kleenean isDelayed, ParseResult parseResult) {
+    public boolean initAsync(Expression<?>[] exprs, int matchedPattern, Kleenean isDelayed, ParseResult parseResult) {
         this.exprClientId = (Expression<String>) exprs[0];
         this.exprClientToken = (Expression<String>) exprs[1];
         this.exprClientSecret = (Expression<String>) exprs[2];
@@ -53,7 +51,7 @@ public class EffLoginTwitchBot extends Effect {
     }
 
     @Override
-    protected void execute(Event event) {
+    protected void executeAsync(Event event) {
         String clientId = exprClientId.getSingle(event);
         String clientSecret = exprClientSecret.getSingle(event);
         String clientToken = exprClientToken.getSingle(event);
@@ -95,6 +93,7 @@ public class EffLoginTwitchBot extends Effect {
             List<User> userName = client.getHelix().getUsers(null, null, Collections.singletonList(channel)).execute().getUsers();
             String userId = userName.get(0).getId();
             client.getPubSub().listenForChannelPointsRedemptionEvents(null, userId);
+            client.getPubSub().listenForChannelPredictionsEvents(null, userId);
         }
 
 

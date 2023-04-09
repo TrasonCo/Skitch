@@ -128,6 +128,17 @@ public class SimpleEvents {
                 "\tset {_reward} to event-rewardtitle",
                 "\tsend \"&a[&5TWITCH&a]&6 &a%{_user}%&6 redeemed the reward &a%{_reward}%&6 in the channel &a%{_livechannel}%&r\" to console")
             .since("1.0.0");
+
+        //! On Prediction Event
+        Skript.registerEvent("Prediction Event", SimpleEvent.class, BridgeEventRewards.class,
+                "twitch prediction [event]")
+            .description("Triggered when a user redeem a custom reward in the given stream.",
+                "Please note that the Channels have to mention in the Login Code")
+            .requiredPlugins("Skript 2.6.3+")
+            .examples("on twitch prediction event:",
+                "\tset {_toppredictor} to event-toppredictor",
+                "\tsend \"%{_toppredictor}%\" to console")
+            .since("1.0.0");
     }
 
 }
