@@ -3,6 +3,7 @@ package com.trason.skitch;
 import com.github.philippheuer.events4j.simple.domain.EventSubscriber;
 import com.github.twitch4j.chat.events.channel.*;
 import com.github.twitch4j.events.ChannelChangeGameEvent;
+import com.github.twitch4j.events.ChannelClipCreatedEvent;
 import com.github.twitch4j.events.ChannelGoLiveEvent;
 import com.github.twitch4j.events.ChannelGoOfflineEvent;
 import com.github.twitch4j.pubsub.events.PredictionUpdatedEvent;
@@ -25,6 +26,12 @@ public class TwitchEventHandler {
             Bukkit.getPluginManager().callEvent(event);
         });
     }
+
+    @EventSubscriber
+    public void onClipCreate(ChannelClipCreatedEvent event) {
+        callEvent(new BridgeEventClip(event));
+    }
+
 
     @EventSubscriber
     public void onGameTitleChange(ChannelChangeGameEvent event){
@@ -66,6 +73,7 @@ public class TwitchEventHandler {
 
         SkitchCommandManager.callEvent(new BridgeEventChat(event).getEvent());
     }
+
 
     @EventSubscriber
     public void onFollow(FollowEvent event) {

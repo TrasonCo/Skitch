@@ -4,6 +4,7 @@ import ch.njol.skript.Skript;
 import ch.njol.skript.lang.util.SimpleEvent;
 import com.trason.skitch.elements.events.bukkit.*;
 
+
 public class SimpleEvents {
 
     static {
@@ -130,7 +131,7 @@ public class SimpleEvents {
             .since("1.0.0");
 
         //! On Prediction Event
-        Skript.registerEvent("Prediction Event", SimpleEvent.class, BridgeEventRewards.class,
+        Skript.registerEvent("Prediction Event", SimpleEvent.class, BridgeEventPrediction.class,
                 "twitch prediction [event]")
             .description("Triggered when a user redeem a custom reward in the given stream.",
                 "Please note that the Channels have to mention in the Login Code")
@@ -138,6 +139,19 @@ public class SimpleEvents {
             .examples("on twitch prediction event:",
                 "\tset {_toppredictor} to event-toppredictor",
                 "\tsend \"%{_toppredictor}%\" to console")
+            .since("1.0.0");
+
+        //! On Clip Create Event
+        Skript.registerEvent("Clip Create Event", SimpleEvent.class, BridgeEventPrediction.class,
+                "twitch clip create [event]")
+            .description("Triggered when a clip is created in the given stream.",
+                "Please note that the Channels have to mention in the Login Code")
+            .requiredPlugins("Skript 2.6.3+")
+            .examples("on twitch clip create event:",
+                "\tset {_clipTitle} to event-cliptitle",
+                "\tset {_clipCreator} to event-liveuser",
+                "\tset {_clipChannel} to event-livechannel",
+                "\tset {_clipThumbnailUrl} to event-clipurl")
             .since("1.0.0");
     }
 
