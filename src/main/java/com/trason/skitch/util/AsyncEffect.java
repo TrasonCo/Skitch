@@ -35,7 +35,6 @@ public abstract class AsyncEffect extends Effect implements Runnable{
         this.event = e;
         variables = Variables.removeLocals(this.event);
         Thread effect = new Thread(this);
-        effect.setName(this.toString());
         effect.start();
 
 
