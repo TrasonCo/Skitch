@@ -10,11 +10,9 @@ public class BridgeEventGoLive extends Event {
     private static final HandlerList handlers = new HandlerList();
 
     private final ChannelGoLiveEvent event;
-    private final String channelName;
 
     public BridgeEventGoLive(ChannelGoLiveEvent event) {
         this.event = event;
-        this.channelName = event.getChannel().getName();
     }
 
     public ChannelGoLiveEvent getEvent() {

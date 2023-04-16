@@ -9,11 +9,9 @@ public class BridgeEventGameChange extends Event {
     private static final HandlerList handlers = new HandlerList();
 
     private final ChannelChangeGameEvent event;
-    private final String channelName;
 
     public BridgeEventGameChange(ChannelChangeGameEvent event) {
         this.event = event;
-        this.channelName = event.getChannel().getName();
     }
 
     public ChannelChangeGameEvent getEvent() {

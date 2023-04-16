@@ -10,11 +10,9 @@ public class BridgeEventOffLive extends Event {
     private static final HandlerList handlers = new HandlerList();
 
     private final ChannelGoOfflineEvent event;
-    private final String channelName;
 
     public BridgeEventOffLive(ChannelGoOfflineEvent event) {
         this.event = event;
-        this.channelName = event.getChannel().getName();
     }
 
     public ChannelGoOfflineEvent getEvent() {

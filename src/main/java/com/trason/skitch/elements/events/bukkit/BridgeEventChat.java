@@ -10,11 +10,10 @@ public class BridgeEventChat extends Event {
     private static final HandlerList handlers = new HandlerList();
 
     private final ChannelMessageEvent event;
-    private final String channelName;
+
 
     public BridgeEventChat(ChannelMessageEvent event) {
         this.event = event;
-        this.channelName = event.getChannel().getName();
     }
 
     public ChannelMessageEvent getEvent() {
