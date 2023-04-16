@@ -26,4 +26,12 @@ public class BridgeEventPrediction extends Event {
     public static HandlerList getHandlerList() {
         return handlers;
     }
+
+    public String getWinningOutcomeId() {
+        return event.getEvent().getWinningOutcomeId();
+    }
+
+    public String getStatus() {
+        return event.getEvent().getStatus();
+    }
 }
