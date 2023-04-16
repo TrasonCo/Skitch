@@ -5,6 +5,7 @@ import ch.njol.skript.classes.Changer;
 import ch.njol.skript.expressions.base.SimplePropertyExpression;
 import com.github.twitch4j.helix.domain.Prediction;
 import org.bukkit.event.Event;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class ExprChannelId extends SimplePropertyExpression<Prediction.PredictionBuilder, String> {
@@ -19,7 +20,7 @@ public class ExprChannelId extends SimplePropertyExpression<Prediction.Predictio
     }
 
     @Override
-    protected String getPropertyName() { // This is for Debuggingug
+    protected @NotNull String getPropertyName() { // This is for Debugging
         return "prediction target";
     }
 
@@ -29,19 +30,19 @@ public class ExprChannelId extends SimplePropertyExpression<Prediction.Predictio
     }
 
     @Override
-    public Class<? extends String> getReturnType() {
+    public @NotNull Class<? extends String> getReturnType() {
         return String.class;
     }
 
     @Override
-    public @Nullable Class<?>[] acceptChange(Changer.ChangeMode mode) {
+    public Class<?> @NotNull [] acceptChange(Changer.@NotNull ChangeMode mode) {
         if (mode == Changer.ChangeMode.SET)
             return new Class[] {String.class};
         return new Class[0];
     }
 
     @Override
-    public void change(Event e, @Nullable Object[] delta, Changer.ChangeMode mode) {
+    public void change(@NotNull Event e, Object @NotNull [] delta, Changer.@NotNull ChangeMode mode) {
         if (delta == null || delta.length == 0 || delta.length > 45 || !(delta[0] instanceof String)) {
             Skript.warning("The input for target is wrong!");
             return;

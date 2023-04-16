@@ -8,6 +8,7 @@ import ch.njol.skript.lang.SkriptParser;
 import ch.njol.skript.lang.TriggerItem;
 import ch.njol.util.Kleenean;
 import com.github.twitch4j.helix.domain.Prediction;
+import org.apache.commons.lang3.exception.ContextedRuntimeException;
 import org.bukkit.event.Event;
 
 import java.util.List;
