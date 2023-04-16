@@ -12,6 +12,7 @@ import ch.njol.util.Kleenean;
 import com.github.twitch4j.helix.domain.Stream;
 import com.github.twitch4j.helix.domain.StreamList;
 import com.trason.skitch.elements.events.bukkit.BridgeEventChat;
+import com.trason.skitch.elements.events.bukkit.BridgeEventClip;
 import com.trason.skitch.elements.events.bukkit.BridgeEventGoLive;
 import org.bukkit.event.Event;
 
@@ -47,6 +48,10 @@ public class ExprLiveThumbnail extends SimpleExpression<String> {
             StreamList list = client.getHelix().getStreams(null, null, null, 1, null, null, null, Collections.singletonList(((BridgeEventChat) event).getEvent().getChannel().getName())).execute();
             Stream str = list.getStreams().get(0);
             String thumbnail = str.getThumbnailUrl(1280,720);
+            return new String[]{thumbnail};
+        }
+        else if (event instanceof BridgeEventClip) {
+            String thumbnail = ((BridgeEventClip) event).getEvent().getClip().getThumbnailUrl();
             return new String[]{thumbnail};
         }
         else

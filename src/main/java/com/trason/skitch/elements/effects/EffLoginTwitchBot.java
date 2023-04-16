@@ -14,6 +14,8 @@ import com.trason.skitch.TwitchEventHandler;
 import com.trason.skitch.util.AsyncEffect;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.event.Event;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -42,7 +44,7 @@ public class EffLoginTwitchBot extends AsyncEffect {
 
     @SuppressWarnings("unchecked")
     @Override
-    public boolean initAsync(Expression<?>[] exprs, int matchedPattern, Kleenean isDelayed, ParseResult parseResult) {
+    public boolean initAsync(Expression<?>[] exprs, int matchedPattern, @NotNull Kleenean isDelayed, @NotNull ParseResult parseResult) {
         this.exprClientId = (Expression<String>) exprs[0];
         this.exprClientToken = (Expression<String>) exprs[1];
         this.exprClientSecret = (Expression<String>) exprs[2];
@@ -51,7 +53,7 @@ public class EffLoginTwitchBot extends AsyncEffect {
     }
 
     @Override
-    protected void executeAsync(Event event) {
+    protected void executeAsync(@NotNull Event event) {
         String clientId = exprClientId.getSingle(event);
         String clientSecret = exprClientSecret.getSingle(event);
         String clientToken = exprClientToken.getSingle(event);
@@ -100,13 +102,16 @@ public class EffLoginTwitchBot extends AsyncEffect {
         // Enable Event Listeners
 
 
+        client.getClientHelper().enableClipEventListener(Arrays.asList(clientChannels));
         client.getClientHelper().enableFollowEventListener(Arrays.asList(clientChannels));
         client.getClientHelper().enableStreamEventListener(Arrays.asList(clientChannels));
+
+      // Register Event Listener
         client.getEventManager().getEventHandler(SimpleEventHandler.class).registerListener(new TwitchEventHandler(Skitch.getPlugin(Skitch.class)));
     }
 
     @Override
-    public String toString(Event e, boolean debug) {
+    public @NotNull String toString(Event e, boolean debug) {
         // NEVER return null here! It's used for debugging and more, so it's important to return a valid string representing the effect.
         return "twitch login to client " + exprClientId.toString(e, debug) + " with token " + exprClientToken.toString(e, debug) + " with secret " + exprClientSecret.toString(e, debug) + " to overview " + exprClientChannel.toString(e, debug);
     }
