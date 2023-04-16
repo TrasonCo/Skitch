@@ -9,7 +9,6 @@ import ch.njol.skript.variables.Variables;
 import ch.njol.util.Kleenean;
 import org.bukkit.event.Event;
 
-import java.util.stream.Stream;
 
 public abstract class AsyncEffect extends Effect implements Runnable{
 
