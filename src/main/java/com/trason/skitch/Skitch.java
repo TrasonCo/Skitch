@@ -10,23 +10,21 @@ import java.io.IOException;
 public final class Skitch extends JavaPlugin {
 
     private static Skitch instance;
-
     private SkriptAddon addon;
     private ITwitchClient client;
 
     @Override
     public void onEnable() {
 
-        // All you have to do is adding the following two lines in your onEnable method.
-        int pluginId = 17842; // <-- Replace with the id of your plugin!
+        // Metrics
+        int pluginId = 17842;
         Metrics metrics = new Metrics(this, pluginId);
 
 
-
+        // Plugin startup logic
         instance = this;
         addon = Skript.registerAddon(this);
         try {
-            // This will register all our syntax for us. Explained below
             addon.loadClasses("com.trason.skitch.elements");
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -42,7 +40,7 @@ public final class Skitch extends JavaPlugin {
         }
     }
 
-    public Skitch getInstance() {
+    public static Skitch getInstance() {
         return instance;
     }
 
