@@ -12,6 +12,7 @@ import ch.njol.util.Kleenean;
 import com.trason.skitch.SkitchCommandManager;
 import com.trason.skitch.elements.events.custom.CommandEvent;
 import com.trason.skitch.util.BaseScope;
+import com.trason.skitch.util.ConsoleMessages.console;
 import com.trason.skitch.util.commands.CommandParser;
 import com.trason.skitch.util.commands.SkitchCommand;
 import org.bukkit.event.Event;
@@ -23,7 +24,7 @@ public class SkitchScope extends BaseScope<SkitchCommand> {
     static {
         Skript.registerEvent("Skitch Command", SkitchScope.class, CommandEvent.class, "skitch command <([^\\s]+)( .+)?$>")
             .description("TODO: Write a description about this.");
-        System.out.println("SkitchScope registered");
+        console.info("SkitchScope registered");
     }
 
     public static final SectionValidator validator = new SectionValidator()
