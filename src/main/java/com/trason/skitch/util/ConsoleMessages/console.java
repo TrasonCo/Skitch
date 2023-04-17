@@ -19,6 +19,10 @@ public class console {
         Skitch.getInstance().getLogger().severe( "PREDICTION" + Cc.WHITE + "| "+ Cc.RED + error);
     }
 
+    public static void ShoutoutError(String error) {
+        Skitch.getInstance().getLogger().severe( "Shoutout" + Cc.WHITE + "| "+ Cc.RED + error);
+    }
+
 
     @SuppressWarnings("unused")
     public static class Cc {
