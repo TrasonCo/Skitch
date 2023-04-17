@@ -4,13 +4,12 @@ import ch.njol.skript.Skript;
 import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
-import ch.njol.skript.lang.Effect;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser.ParseResult;
+import ch.njol.skript.util.AsyncEffect;
 import ch.njol.util.Kleenean;
 import com.github.twitch4j.helix.domain.Prediction;
 import com.netflix.hystrix.exception.HystrixRuntimeException;
-import com.trason.skitch.elements.events.bukkit.BridgeEventChat;
 import com.trason.skitch.util.ConsoleMessages.console;
 import org.apache.commons.lang3.exception.ContextedRuntimeException;
 import org.bukkit.event.Event;
@@ -23,7 +22,7 @@ import static com.trason.skitch.elements.effects.EffLoginTwitchBot.client;
 @Examples({"on command /test:",
         "\tsend \"Hello World!\" to the livechat \"trason\""})
 
-public class EffSendLiveMessage extends Effect {
+public class EffSendLiveMessage extends AsyncEffect {
 
     static {
         Skript.registerEffect(EffSendLiveMessage.class, "send %string/prediction% to [the] livechat %string%");
