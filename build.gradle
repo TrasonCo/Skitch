@@ -3,7 +3,7 @@ import org.apache.tools.ant.filters.ReplaceTokens
 apply plugin: 'java'
 
 group = 'com.trason'
-version = '1.3.0'
+version = '1.3.1'
 
 sourceCompatibility = "11"
 targetCompatibility = "11"
@@ -14,12 +14,15 @@ repositories {
 	maven { url = 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/' }
 	maven { url = 'https://oss.sonatype.org/content/groups/public/' }
 	maven { url = 'https://repo.skriptlang.org/releases' }
+
 }
 
 // Dependencies
 dependencies {
 	// Minecraft server environment (provided)
-	compileOnly 'org.spigotmc:spigot-api:1.19.1-R0.1-SNAPSHOT'
+	compileOnly 'org.spigotmc:spigot-api:1.17.1-R0.1-SNAPSHOT'
+
+	implementation(platform("com.github.philippheuer.events4j:events4j-bom:0.12.0"))
 
 	// Skript
 	compileOnly 'com.github.SkriptLang:Skript:2.6.3'
@@ -28,10 +31,10 @@ dependencies {
 	compileOnly group: 'org.bstats', name: 'bstats-bukkit', version: '3.0.1'
 
 	// Twitch4J
-	implementation group: 'com.github.twitch4j', name: 'twitch4j', version: '1.14.0'
+	implementation group: 'com.github.twitch4j', name: 'twitch4j', version: '1.17.0'
 
-	// Logging
-	implementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.4.6'
+
+
 }
 
 

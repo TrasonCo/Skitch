@@ -14,6 +14,7 @@ import com.github.twitch4j.helix.domain.ChattersList;
 import com.trason.skitch.elements.events.bukkit.BridgeEventChat;
 import com.trason.skitch.elements.events.custom.CommandEvent;
 import org.bukkit.event.Event;
+import org.jetbrains.annotations.NotNull;
 
 
 import static com.trason.skitch.elements.effects.EffLoginTwitchBot.*;
@@ -28,23 +29,24 @@ public class ExprChatters extends SimpleExpression<String> {
     protected String[] get(Event event) {
         if (event instanceof BridgeEventChat) {
             String channelID = ((BridgeEventChat)event).getEvent().getChannel().getId();
-            OAuth2Credential chatAccount = new OAuth2Credential("twitch", clientOaToken);
-            String BotId = new TwitchIdentityProvider(null, null, null).getAdditionalCredentialInformation(chatAccount).get().getUserId();
-            ChattersList chatter = client.getHelix().getChatters(null,channelID,BotId,null,null).execute();
-            String[] chatters = chatter.getChatters().stream().map(Chatter::getUserName).toArray(String[]::new);
-            return chatters;
+            return getChatters(channelID);
         }
         else if (event instanceof CommandEvent) {
             String channelID = ((CommandEvent)event).getEvent().getChannel().getId();
-            OAuth2Credential chatAccount = new OAuth2Credential("twitch", clientOaToken);
-            String BotId = new TwitchIdentityProvider(null, null, null).getAdditionalCredentialInformation(chatAccount).get().getUserId();
-            ChattersList chatter = client.getHelix().getChatters(null,channelID,BotId,null,null).execute();
-            String[] chatters = chatter.getChatters().stream().map(Chatter::getUserName).toArray(String[]::new);
-            return chatters;
+            return getChatters(channelID);
         }
 
         else
             return new String[0];
+    }
+
+    @NotNull
+    private String[] getChatters(String channelID) {
+        OAuth2Credential chatAccount = new OAuth2Credential("twitch", clientOaToken);
+        String BotId = new TwitchIdentityProvider(null, null, null).getAdditionalCredentialInformation(chatAccount).get().getUserId();
+        ChattersList chatter = client.getHelix().getChatters(null,channelID,BotId,null,null).execute();
+        String[] chatters = chatter.getChatters().stream().map(Chatter::getUserName).toArray(String[]::new);
+        return chatters;
     }
 
     @Override

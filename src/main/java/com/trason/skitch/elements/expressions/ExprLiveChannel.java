@@ -13,6 +13,10 @@ import com.trason.skitch.elements.events.bukkit.*;
 import com.trason.skitch.elements.events.custom.CommandEvent;
 import org.bukkit.event.Event;
 
+import java.util.Arrays;
+
+import static com.trason.skitch.elements.effects.EffLoginTwitchBot.client;
+
 @Name("Live Channel")
 @Description("Returns the channel name of the event.")
 @Examples("on twitch cheer:\n" +
@@ -60,7 +64,6 @@ public class ExprLiveChannel extends SimpleExpression<String> {
             String channel = ((BridgeEventSub) event).getEvent().getChannel().getName();
             return new String[]{channel};
         }
-
         else if (event instanceof CommandEvent) {
             String channel = ((CommandEvent) event).getEvent().getChannel().getName();
             return new String[]{channel};
@@ -69,6 +72,13 @@ public class ExprLiveChannel extends SimpleExpression<String> {
             String user = ((BridgeEventClip) event).getEvent().getClip().getBroadcasterName();
             return new String[]{user};
         }
+        else if (event instanceof BridgeEventRewards) {
+            String id = ((BridgeEventRewards) event).getEvent().getRedemption().getChannelId();
+            String user = client.getHelix().getUsers(null, null, Arrays.asList(new String[]{id})).execute().getUsers().get(0).getDisplayName();
+            return new String[]{user};
+        }
+
+
         else
             return new String[0];
     }

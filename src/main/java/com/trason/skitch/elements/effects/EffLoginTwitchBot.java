@@ -12,13 +12,14 @@ import com.github.twitch4j.helix.domain.User;
 import com.trason.skitch.Skitch;
 import com.trason.skitch.TwitchEventHandler;
 import com.trason.skitch.util.AsyncEffect;
+import com.trason.skitch.util.ConsoleMessages.console;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
-
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.logging.Level;
 
 @Name("Twitch Bot Login")
 @Description({"This is to login your Twitch Bot Account"})
@@ -82,7 +83,6 @@ public class EffLoginTwitchBot extends AsyncEffect {
             .withClientSecret(clientSecret)
             .withEnableChat(true)
             .withEnablePubSub(true)
-            .withEnableTMI(true)
             .withChatAccount(credential)
             .withEnableHelix(true)
             .withDefaultAuthToken(credential)
@@ -106,8 +106,15 @@ public class EffLoginTwitchBot extends AsyncEffect {
         client.getClientHelper().enableFollowEventListener(Arrays.asList(clientChannels));
         client.getClientHelper().enableStreamEventListener(Arrays.asList(clientChannels));
 
-      // Register Event Listener
+        // Register Event Listener
         client.getEventManager().getEventHandler(SimpleEventHandler.class).registerListener(new TwitchEventHandler(Skitch.getPlugin(Skitch.class)));
+        console.SkitchLogin("____________________________________________");
+        console.SkitchLogin("Twitch Bot Login Successful!");
+        console.SkitchLogin("____________________________________________");
+
+        for (String names : clientChannels) {
+            console.SkitchLogin("Joined: " + console.Cc.GOLD + names);
+        }
     }
 
     @Override

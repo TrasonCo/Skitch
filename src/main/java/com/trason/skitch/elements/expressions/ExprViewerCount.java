@@ -29,47 +29,63 @@ public class ExprViewerCount extends SimpleExpression<String> {
 
     static {
         Skript.registerExpression(ExprViewerCount.class, String.class, ExpressionType.SIMPLE,
-            "[event-]viewer[count]");
+            "[event-]viewer[count] [of [the] [channel] %string%]");
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public boolean init(Expression<?>[] exprs, int matchedPattern, Kleenean isDelayed, ParseResult parseResult) {
+        this.exprLiveChannel = (Expression<String>) exprs[0];
         return true;
     }
 
+
+    private Expression<String> exprLiveChannel;
+
     @Override
     protected String[] get(Event event) {
+        String channel = exprLiveChannel.getSingle(event);
 
-        try {
-            if (event instanceof BridgeEventGoLive) {
-                String viewerCount = ((BridgeEventGoLive) event).getEvent().getStream().getViewerCount().toString();
-                return new String[]{viewerCount};
-            }
-            else if (event instanceof BridgeEventChat) {
-                StreamList list = client.getHelix().getStreams(null, null, null, 1, null, null, null, Collections.singletonList(((BridgeEventChat) event).getEvent().getChannel().getName())).execute();
-                Stream str = list.getStreams().get(0);
-                String viewerCount = str.getViewerCount().toString();
-                return new String[]{viewerCount};
-            }
-            else if (event instanceof BridgeEventFollow) {
-                StreamList list = client.getHelix().getStreams(null, null, null, 1, null, null, null, Collections.singletonList(((BridgeEventFollow) event).getEvent().getChannel().getName())).execute();
-                Stream str = list.getStreams().get(0);
-                String viewerCount = str.getViewerCount().toString();
-                return new String[]{viewerCount};
-            }
+        if (channel == null) {
+            try {
+                if (event instanceof BridgeEventGoLive) {
+                    String viewerCount = ((BridgeEventGoLive) event).getEvent().getStream().getViewerCount().toString();
+                    return new String[]{viewerCount};
+                } else if (event instanceof BridgeEventChat) {
+                    StreamList list = client.getHelix().getStreams(null, null, null, 1, null, null, null, Collections.singletonList(((BridgeEventChat) event).getEvent().getChannel().getName())).execute();
+                    Stream str = list.getStreams().get(0);
+                    String viewerCount = str.getViewerCount().toString();
+                    return new String[]{viewerCount};
+                } else if (event instanceof BridgeEventFollow) {
+                    StreamList list = client.getHelix().getStreams(null, null, null, 1, null, null, null, Collections.singletonList(((BridgeEventFollow) event).getEvent().getChannel().getName())).execute();
+                    Stream str = list.getStreams().get(0);
+                    String viewerCount = str.getViewerCount().toString();
+                    return new String[]{viewerCount};
+                } else if (event instanceof CommandEvent) {
+                    StreamList list = client.getHelix().getStreams(null, null, null, 1, null, null, null, Collections.singletonList(((CommandEvent) event).getEvent().getChannel().getName())).execute();
+                    Stream str = list.getStreams().get(0);
+                    String viewerCount = str.getViewerCount().toString();
+                    return new String[]{viewerCount};
+                }
 
-            else if (event instanceof CommandEvent) {
-                StreamList list = client.getHelix().getStreams(null, null, null, 1, null, null, null, Collections.singletonList(((CommandEvent) event).getEvent().getChannel().getName())).execute();
-                Stream str = list.getStreams().get(0);
-                String viewerCount = str.getViewerCount().toString();
-                return new String[]{viewerCount};
+
+            } catch (IndexOutOfBoundsException e) {
+                return new String[]{"STREAM_OFFLINE"};
             }
-            else
-                return new String[0];}
-        catch (IndexOutOfBoundsException e) {
-            return new String[]{"STREAM_OFFLINE"};
         }
+        else if (channel != null) {
+            try {
+                StreamList list = client.getHelix().getStreams(null, null, null, 1, null, null, null, Collections.singletonList(channel)).execute();
+                Stream str = list.getStreams().get(0);
+                String viewerCount = str.getViewerCount().toString();
+                return new String[]{viewerCount};
+            } catch (IndexOutOfBoundsException e) {
+                return new String[]{"STREAM_OFFLINE"};
+            }
+        }
+        return null;
     }
+
 
     @Override
     public boolean isSingle() {

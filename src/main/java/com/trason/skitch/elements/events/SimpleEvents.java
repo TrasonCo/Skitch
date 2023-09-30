@@ -153,6 +153,8 @@ public class SimpleEvents {
                 "\tset {_clipChannel} to event-livechannel",
                 "\tset {_clipThumbnailUrl} to event-clipurl")
             .since("1.0.0");
+
+
     }
 
 }

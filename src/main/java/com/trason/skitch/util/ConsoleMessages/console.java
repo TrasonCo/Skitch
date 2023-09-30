@@ -11,6 +11,10 @@ public class console {
         Skitch.getInstance().getLogger().warning( Cc.WHITE + "| " + Cc.YELLOW + warning);
     }
 
+    public static void SkitchLogin(String info) {
+        Skitch.getInstance().getLogger().info( Cc.WHITE + "| " + Cc.GREEN + info);
+    }
+
     public static void error(String error) {
         Skitch.getInstance().getLogger().severe( Cc.WHITE + "| "+ Cc.RED + error);
     }

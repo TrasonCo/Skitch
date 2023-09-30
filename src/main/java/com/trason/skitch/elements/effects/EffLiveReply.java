@@ -44,8 +44,6 @@ public class EffLiveReply extends AsyncEffect {
         }
         else if (event instanceof CommandEvent) {
             String message = exprMessage.getSingle(event);
-            String channel = ((CommandEvent) event).getEvent().getChannel().getName();
-            // We check if the values are null, you should always do this for expression :)
             if (message == null)
                 return;
             client.getChat().sendMessage(((CommandEvent) event).getEvent().getChannel().getName(), message, CryptoUtils.generateNonce(32), ((CommandEvent) event).getEvent().getMessageEvent().getMessageId().orElse(null));

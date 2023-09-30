@@ -37,15 +37,19 @@ public class ExprLiveUptime extends SimpleExpression<String> {
 
     @Override
     protected String[] get(Event event) {
-        if (event instanceof BridgeEventChat) {
-            StreamList list = client.getHelix().getStreams(null, null, null, 1, null, null, null, Collections.singletonList(((BridgeEventChat) event).getEvent().getChannel().getName())).execute();
-            Stream str = list.getStreams().get(0);
-            long time = str.getUptime().getSeconds();
-            return new String[]{String.format("%d:%02d:%02d", time / 3600, (time % 3600) / 60, (time % 60))};
+        try {
+            if (event instanceof BridgeEventChat) {
+                StreamList list = client.getHelix().getStreams(null, null, null, 1, null, null, null, Collections.singletonList(((BridgeEventChat) event).getEvent().getChannel().getName())).execute();
+                Stream str = list.getStreams().get(0);
+                long time = str.getUptime().getSeconds();
+                return new String[]{String.format("%d:%02d:%02d", time / 3600, (time % 3600) / 60, (time % 60))};
+            }
+        } catch (IndexOutOfBoundsException e) {
+            return new String[]{"STREAM_OFFLINE"};
         }
-
         return new String[0];
     }
+
 
     @Override
     public boolean isSingle() {
