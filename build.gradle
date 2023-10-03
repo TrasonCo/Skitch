@@ -3,7 +3,7 @@ import org.apache.tools.ant.filters.ReplaceTokens
 apply plugin: 'java'
 
 group = 'com.trason'
-version = '1.3.1'
+version = '1.3.2'
 
 sourceCompatibility = "11"
 targetCompatibility = "11"
