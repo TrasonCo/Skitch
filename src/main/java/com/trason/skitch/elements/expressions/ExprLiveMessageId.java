@@ -7,6 +7,7 @@ import ch.njol.skript.lang.SkriptParser;
 import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.util.Kleenean;
 import com.trason.skitch.elements.events.bukkit.BridgeEventChat;
+import com.trason.skitch.elements.events.custom.CommandEvent;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -21,8 +22,14 @@ public class ExprLiveMessageId extends SimpleExpression<String> {
     @Override
     protected String @NotNull [] get(@NotNull Event event) {
         if (event instanceof BridgeEventChat){
-            String messageId = ((BridgeEventChat) event).getEvent().getMessageEvent().getMessageId().toString();
-            return new String[]{messageId};
+            String messageId = String.valueOf(((BridgeEventChat) event).getEvent().getMessageEvent().getMessageId());
+            String msgId = messageId.replace("Optional[", "").replace("]", "");
+            return new String[]{msgId};
+        }
+        if (event instanceof CommandEvent){
+            String messageId = String.valueOf(((CommandEvent) event).getEvent().getMessageEvent().getMessageId());
+            String msgId = messageId.replace("Optional[", "").replace("]", "");
+            return new String[]{msgId};
         }
         return new String[0];
     }
