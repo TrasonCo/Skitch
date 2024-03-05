@@ -119,11 +119,11 @@ public class SimpleEvents {
 
         //! On CustomReward Event
         Skript.registerEvent("Custom Reward Event", SimpleEvent.class, BridgeEventRewards.class,
-                "twitch custom reward [event]")
+                "twitch reward redeemed [event]")
             .description("Triggered when a user redeem a custom reward in the given stream.",
                 "Please note that the Channels have to mention in the Login Code")
             .requiredPlugins("Skript 2.6.3+")
-            .examples("on twitch custom reward event:",
+            .examples("on twitch reward redeemed:",
                 "\tset {_channel} to event-livechannel",
                 "\tset {_user} to event-liveuser",
                 "\tset {_reward} to event-rewardtitle",
@@ -132,9 +132,8 @@ public class SimpleEvents {
 
         //! On Prediction Event
         Skript.registerEvent("Prediction Event", SimpleEvent.class, BridgeEventPrediction.class,
-                "twitch prediction [event]")
-            .description("Triggered when a user redeem a custom reward in the given stream.",
-                "Please note that the Channels have to mention in the Login Code")
+                "twitch prediction resolve [event]")
+            .description("Triggered when a prediction is ended in the given stream.")
             .requiredPlugins("Skript 2.6.3+")
             .examples("on twitch prediction event:",
                 "\tset {_toppredictor} to event-toppredictor",
