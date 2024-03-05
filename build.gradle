@@ -3,7 +3,7 @@ import org.apache.tools.ant.filters.ReplaceTokens
 apply plugin: 'java'
 
 group = 'com.trason'
-version = '1.3.2'
+version = '1.4.0'
 
 sourceCompatibility = "11"
 targetCompatibility = "11"
@@ -31,7 +31,7 @@ dependencies {
 	compileOnly group: 'org.bstats', name: 'bstats-bukkit', version: '3.0.1'
 
 	// Twitch4J
-	implementation group: 'com.github.twitch4j', name: 'twitch4j', version: '1.17.0'
+	implementation group: 'com.github.twitch4j', name: 'twitch4j', version: '1.19.0'
 
 
 
