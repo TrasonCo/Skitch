@@ -72,9 +72,11 @@ public class TwitchEventHandler {
 
     @EventSubscriber
     public void onChat(ChannelMessageEvent event) {
-        callEvent(new BridgeEventChat(event));
+        Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
+            callEvent(new BridgeEventChat(event));
 
-        SkitchCommandManager.callEvent(new BridgeEventChat(event).getEvent());
+            SkitchCommandManager.callEvent(new BridgeEventChat(event).getEvent());
+        });
     }
 
 
