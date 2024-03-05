@@ -15,6 +15,7 @@ import com.github.twitch4j.helix.domain.UserChatColorList;
 import com.trason.skitch.elements.events.bukkit.BridgeEventChat;
 import com.trason.skitch.elements.events.custom.CommandEvent;
 import org.bukkit.event.Event;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -38,7 +39,7 @@ public class ExprChatColor extends SimpleExpression<String> {
 
 
     @Override
-    protected  String[] get(Event event) {
+    protected  String @NotNull [] get(@NotNull Event event) {
         if (event instanceof BridgeEventChat) {
             String userid = ((BridgeEventChat) event).getEvent().getUser().getId();
             UserChatColorList list = client.getHelix().getUserChatColor(null, Collections.singletonList(userid)).execute();
@@ -62,17 +63,17 @@ public class ExprChatColor extends SimpleExpression<String> {
     }
 
     @Override
-    public Class<? extends String> getReturnType() {
+    public @NotNull Class<? extends String> getReturnType() {
         return String.class;
     }
 
     @Override
-    public String toString( Event e, boolean debug) {
+    public @NotNull String toString(Event e, boolean debug) {
         return "chat color";
     }
 
     @Override
-    public boolean init(Expression<?>[] exprs, int matchedPattern, Kleenean isDelayed, SkriptParser.ParseResult parseResult) {
+    public boolean init(Expression<?> @NotNull [] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.@NotNull ParseResult parseResult) {
         if (!ParserInstance.get().isCurrentEvent(BridgeEventChat.class, CommandEvent.class)) {
             Skript.error("You cannot use chat color outside an LiveMessage or Command event!");
             return false;
