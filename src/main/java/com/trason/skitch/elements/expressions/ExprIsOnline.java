@@ -21,7 +21,7 @@ import static com.trason.skitch.elements.effects.EffLoginTwitchBot.client;
 
 
 @Name("Twitch Channel Status")
-@Description("Returns the status of the Channel!.")
+@Description("Returns the status of the Channel! If the channel is online, it will return 'ONLINE' else 'OFFLINE'. needs the channel name as input.")
 @Examples("on twitch message:\n" +
         "\tbroadcast \"%twitch channel status of event-channel%\"")
 public class ExprIsOnline extends SimpleExpression<String> {

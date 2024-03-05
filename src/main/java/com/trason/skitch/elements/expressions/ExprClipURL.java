@@ -1,6 +1,9 @@
 package com.trason.skitch.elements.expressions;
 
 import ch.njol.skript.Skript;
+import ch.njol.skript.doc.Description;
+import ch.njol.skript.doc.Examples;
+import ch.njol.skript.doc.Name;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.ExpressionType;
 import ch.njol.skript.lang.SkriptParser;
@@ -9,6 +12,9 @@ import ch.njol.util.Kleenean;
 import com.trason.skitch.elements.events.bukkit.BridgeEventClip;
 import org.bukkit.event.Event;
 
+@Name("Clip URL")
+@Description("Returns the URL of the clip.")
+@Examples("set {_url} to clipurl")
 public class ExprClipURL extends SimpleExpression<String> {
 
     static {

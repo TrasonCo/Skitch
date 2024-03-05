@@ -13,7 +13,7 @@ import com.trason.skitch.elements.events.bukkit.*;
 import org.bukkit.event.Event;
 
 @Name("Sub Tier")
-@Description("Returns the sub tier of the event.")
+@Description("Returns the sub tier of the sub. NONE, TIER1, TIER2, TIER3, TWITCH_PRIME")
 @Examples("on twitch sub:\n" +
         "\tbroadcast \"%event-subtier%\"")
 

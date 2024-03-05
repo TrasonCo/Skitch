@@ -10,10 +10,12 @@ import ch.njol.skript.util.AsyncEffect;
 import ch.njol.util.Kleenean;
 import com.github.philippheuer.credentialmanager.domain.OAuth2Credential;
 import com.github.twitch4j.auth.providers.TwitchIdentityProvider;
-import com.github.twitch4j.helix.domain.AnnouncementColor;
+import com.github.twitch4j.common.enums.AnnouncementColor;
 import com.trason.skitch.elements.events.bukkit.BridgeEventChat;
 import com.trason.skitch.elements.events.custom.CommandEvent;
+import com.trason.skitch.util.ConsoleMessages.console;
 import org.bukkit.event.Event;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import static com.trason.skitch.elements.effects.EffLoginTwitchBot.client;
@@ -37,13 +39,13 @@ public class EffAnnounce extends AsyncEffect {
     private Expression<String> exprColor;
 
     @Override
-    protected void execute(Event event) {
+    protected void execute(@NotNull Event event) {
         String message = exprMessage.getSingle(event);
         String color = exprColor.getSingle(event).toUpperCase();
         OAuth2Credential chatAccount = new OAuth2Credential("twitch", clientOaToken);
         String botId = new TwitchIdentityProvider(null, null, null).getAdditionalCredentialInformation(chatAccount).get().getUserId();
-        if (message == null || color == null)
-            return;
+        if (message == null)
+            console.error("&c[Skitch] &4Error: &cEmpty Message!");
         if (event instanceof BridgeEventChat) {
             String bID = ((BridgeEventChat) event).getEvent().getChannel().getId();
             client.getHelix().sendChatAnnouncement(null, bID, botId, message, AnnouncementColor.valueOf(color)).execute();

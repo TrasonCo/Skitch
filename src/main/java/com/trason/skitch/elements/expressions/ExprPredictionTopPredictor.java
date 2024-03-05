@@ -1,6 +1,9 @@
 package com.trason.skitch.elements.expressions;
 
 import ch.njol.skript.Skript;
+import ch.njol.skript.doc.Description;
+import ch.njol.skript.doc.Examples;
+import ch.njol.skript.doc.Name;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.ExpressionType;
 import ch.njol.skript.lang.SkriptParser;
@@ -15,7 +18,10 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.stream.Collectors;
 
-
+@Name("Top Predictor")
+@Description("Returns the top predictor of the event.")
+@Examples("on twitch prediction resolve:\n" +
+        "\tbroadcast \"%event-toppredictor%\"")
 public class ExprPredictionTopPredictor extends SimpleExpression<String> {
 
     static {

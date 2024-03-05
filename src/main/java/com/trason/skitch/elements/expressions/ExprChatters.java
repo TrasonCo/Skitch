@@ -1,6 +1,9 @@
 package com.trason.skitch.elements.expressions;
 
 import ch.njol.skript.Skript;
+import ch.njol.skript.doc.Description;
+import ch.njol.skript.doc.Examples;
+import ch.njol.skript.doc.Name;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.ExpressionType;
 import ch.njol.skript.lang.SkriptParser;
@@ -18,6 +21,10 @@ import org.jetbrains.annotations.NotNull;
 
 
 import static com.trason.skitch.elements.effects.EffLoginTwitchBot.*;
+
+@Name("Chatters")
+@Description("Returns the chatters in the channel.")
+@Examples("set {_chatters::*} to chatters")
 
 public class ExprChatters extends SimpleExpression<String> {
 
@@ -55,12 +62,12 @@ public class ExprChatters extends SimpleExpression<String> {
     }
 
     @Override
-    public Class<? extends String> getReturnType() {
+    public @NotNull Class<? extends String> getReturnType() {
         return String.class;
     }
 
     @Override
-    public String toString(Event event, boolean debug) {
+    public @NotNull String toString(Event event, boolean debug) {
         return "event-chatter";
     }
 

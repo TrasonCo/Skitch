@@ -1,6 +1,9 @@
 package com.trason.skitch.elements.effects;
 
 import ch.njol.skript.Skript;
+import ch.njol.skript.doc.Description;
+import ch.njol.skript.doc.Examples;
+import ch.njol.skript.doc.Name;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.skript.util.AsyncEffect;
@@ -16,6 +19,10 @@ import org.jetbrains.annotations.NotNull;
 import static com.trason.skitch.elements.effects.EffLoginTwitchBot.client;
 import static com.trason.skitch.elements.effects.EffLoginTwitchBot.clientOaToken;
 
+@Name("Twitch Delete Message")
+@Description("Delete a message from a channel!(Message Id is needed!)")
+@Examples("on twitch message:\n" +
+        "\ttwitch delete \"messageID\" from channel \"channelID\"")
 public class EffDeleteMessages extends AsyncEffect {
 
     static {

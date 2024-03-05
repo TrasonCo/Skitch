@@ -1,6 +1,9 @@
 package com.trason.skitch.elements.expressions;
 
 import ch.njol.skript.Skript;
+import ch.njol.skript.doc.Description;
+import ch.njol.skript.doc.Examples;
+import ch.njol.skript.doc.Name;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.ExpressionType;
 import ch.njol.skript.lang.SkriptParser;
@@ -9,9 +12,11 @@ import ch.njol.util.Kleenean;
 import com.github.twitch4j.helix.domain.Prediction;
 import com.trason.skitch.elements.sections.SecPrediction;
 import org.bukkit.event.Event;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+@Name("Last Prediction")
+@Description("Returns the last prediction.")
+@Examples("set {_prediction} to last prediction")
 public class ExprLastPrediction extends SimpleExpression<Prediction.PredictionBuilder> {
 
     static {
