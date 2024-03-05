@@ -1,7 +1,6 @@
 package com.trason.skitch;
 
 import com.github.philippheuer.events4j.simple.domain.EventSubscriber;
-import com.github.twitch4j.chat.events.ChatConnectionStateEvent;
 import com.github.twitch4j.chat.events.channel.*;
 import com.github.twitch4j.events.ChannelChangeGameEvent;
 import com.github.twitch4j.events.ChannelClipCreatedEvent;
@@ -10,7 +9,6 @@ import com.github.twitch4j.events.ChannelGoOfflineEvent;
 import com.github.twitch4j.pubsub.events.PredictionUpdatedEvent;
 import com.github.twitch4j.pubsub.events.RewardRedeemedEvent;
 import com.trason.skitch.elements.events.bukkit.*;
-import com.trason.skitch.util.ConsoleMessages.console;
 import org.bukkit.*;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
