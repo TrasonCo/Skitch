@@ -110,10 +110,11 @@ public class EffLoginTwitchBot extends AsyncEffect {
         client.getEventManager().getEventHandler(SimpleEventHandler.class).registerListener(new TwitchEventHandler(Skitch.getPlugin(Skitch.class)));
         console.SkitchLogin(console.Cc.PURPLE + "____________________________________________");
         console.SkitchLogin(console.Cc.PURPLE + "Twitch Bot Login Successful!");
-        console.SkitchLogin(console.Cc.PURPLE + "____________________________________________");
+        console.SkitchLogin(console.Cc.PURPLE + "____________________________________________" + console.Cc.GOLD);
 
         for (String names : clientChannels) {
             console.SkitchLogin("Joined: " + console.Cc.GOLD + names);
+            console.SkitchLogin(console.Cc.GOLD + "____________________________________________" + console.Cc.RESET);
         }
     }
 
