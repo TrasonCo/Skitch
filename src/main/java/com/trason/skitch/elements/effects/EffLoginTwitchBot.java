@@ -114,8 +114,9 @@ public class EffLoginTwitchBot extends AsyncEffect {
 
         for (String names : clientChannels) {
             console.SkitchLogin("Joined: " + console.Cc.GOLD + names);
-            console.SkitchLogin(console.Cc.GOLD + "____________________________________________" + console.Cc.RESET);
         }
+        console.SkitchLogin(console.Cc.GOLD + "____________________________________________" + console.Cc.RESET);
+
     }
 
     @Override
