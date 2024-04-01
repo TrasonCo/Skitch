@@ -12,8 +12,10 @@ import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.util.Kleenean;
 import com.github.twitch4j.helix.domain.ChannelVip;
 import com.github.twitch4j.helix.domain.ChannelVipList;
+import com.netflix.hystrix.exception.HystrixRuntimeException;
 import com.trason.skitch.elements.events.bukkit.BridgeEventChat;
 import com.trason.skitch.elements.events.custom.CommandEvent;
+import com.trason.skitch.util.ConsoleMessages.console;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 
@@ -33,20 +35,24 @@ public class ExprChannelVips extends SimpleExpression<String> {
 
     @Override
     protected String @NotNull [] get(@NotNull Event event) {
-        if (event instanceof BridgeEventChat) {
-            String channelId = ((BridgeEventChat) event).getEvent().getChannel().getId();
-            ChannelVipList vipList = client.getHelix().getChannelVips(null, channelId, null, 100, null).execute();
-            String[] vips = vipList.getData().stream().map(ChannelVip::getUserName).toArray(String[]::new);
-            return vips;
+        try {
+            if (event instanceof BridgeEventChat) {
+                String channelId = ((BridgeEventChat) event).getEvent().getChannel().getId();
+                ChannelVipList vipList = client.getHelix().getChannelVips(null, channelId, null, 100, null).execute();
+                String[] vips = vipList.getData().stream().map(ChannelVip::getUserName).toArray(String[]::new);
+                return vips;
+            }
+            else if (event instanceof CommandEvent) {
+                String channelId = ((CommandEvent) event).getEvent().getChannel().getId();
+                ChannelVipList vipList = client.getHelix().getChannelVips(null, channelId, null, 100, null).execute();
+                String[] vips = vipList.getData().stream().map(ChannelVip::getUserName).toArray(String[]::new);
+                return vips;
+            }
+        } catch (HystrixRuntimeException e) {
+            console.error("Error:[getChannelVips] You don't have the broadcaster permission to get the Vip list.");
         }
-        else if (event instanceof CommandEvent) {
-            String channelId = ((CommandEvent) event).getEvent().getChannel().getId();
-            ChannelVipList vipList = client.getHelix().getChannelVips(null, channelId, null, 100, null).execute();
-            String[] vips = vipList.getData().stream().map(ChannelVip::getUserName).toArray(String[]::new);
-            return vips;
-        }
-        else
-            return new String[0];
+        return new String[0];
+
     }
 
     @Override
