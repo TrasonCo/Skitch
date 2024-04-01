@@ -25,7 +25,7 @@ public class ExprGetModerators extends SimpleExpression<String> {
     }
 
     @Override
-    protected String @NotNull [] get(Event event) {
+    protected String @NotNull [] get(@NotNull Event event) {
         try {
             if (event instanceof BridgeEventChat) {
                 String channelId = ((BridgeEventChat) event).getEvent().getChannel().getId();
@@ -62,7 +62,7 @@ public class ExprGetModerators extends SimpleExpression<String> {
     }
 
     @Override
-    public boolean init(Expression<?>[] expressions, int i, @NotNull Kleenean kleenean, SkriptParser.@NotNull ParseResult parseResult) {
+    public boolean init(Expression<?> @NotNull [] expressions, int i, @NotNull Kleenean kleenean, SkriptParser.@NotNull ParseResult parseResult) {
         return true;
     }
 }
