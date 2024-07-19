@@ -153,6 +153,17 @@ public class SimpleEvents {
                 "\tset {_clipThumbnailUrl} to event-clipurl")
             .since("1.0.0");
 
+        //! On Private Message Event
+        Skript.registerEvent("Private Message Event", SimpleEvent.class, BridgeEventPrivateMessage.class,
+                "twitch private message [event]")
+            .description("Triggered when a user send a private message to the bot.",
+                "Please note that the Channels have to mention in the Login Code")
+            .requiredPlugins("Skript 2.8.*")
+            .examples("on twitch private message event:",
+                "\tset {_user} to event-liveuser",
+                "\tset {_message} to event-livemessage",
+                "\tsend \"&a[&5TWITCH&a]&6 &a%{_user}%&6 sent a private message: &a%{_message}%&r\" to console")
+            .since("1.4.3");
 
     }
 

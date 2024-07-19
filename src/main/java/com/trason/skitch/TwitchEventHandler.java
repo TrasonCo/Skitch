@@ -2,6 +2,7 @@ package com.trason.skitch;
 
 import com.github.philippheuer.events4j.simple.domain.EventSubscriber;
 import com.github.twitch4j.chat.events.channel.*;
+import com.github.twitch4j.common.events.user.PrivateMessageEvent;
 import com.github.twitch4j.events.ChannelChangeGameEvent;
 import com.github.twitch4j.events.ChannelClipCreatedEvent;
 import com.github.twitch4j.events.ChannelGoLiveEvent;
@@ -32,7 +33,10 @@ public class TwitchEventHandler {
         callEvent(new BridgeEventClip(event));
     }
 
-
+    @EventSubscriber
+    public void onPrivateMessage(PrivateMessageEvent event) {
+        callEvent(new BridgeEventPrivateMessage(event));
+    }
 
     @EventSubscriber
     public void onGameTitleChange(ChannelChangeGameEvent event){
