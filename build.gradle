@@ -3,7 +3,7 @@ import org.apache.tools.ant.filters.ReplaceTokens
 apply plugin: 'java'
 
 group = 'com.trason'
-version = '1.4.3'
+version = '1.4.4'
 
 sourceCompatibility = "17"
 targetCompatibility = "17"
@@ -28,10 +28,10 @@ dependencies {
 	implementation(platform("com.github.philippheuer.events4j:events4j-bom:0.12.0"))
 
 	// Skript
-	compileOnly 'com.github.SkriptLang:Skript:2.8.0'
+	compileOnly 'com.github.SkriptLang:Skript:2.10.0'
 
 	// bStats
-	compileOnly group: 'org.bstats', name: 'bstats-bukkit', version: '3.0.1'
+	compileOnly group: 'org.bstats', name: 'bstats-bukkit', version: '3.0.2'
 
 	// Twitch4J
 	implementation group: 'com.github.twitch4j', name: 'twitch4j', version: '1.21.0'
@@ -46,7 +46,7 @@ dependencies {
 // Ensure plugin.yml has the version defined here
 processResources {
 	from(sourceSets.main.resources.srcDirs) {
-		duplicatesStrategy DuplicatesStrategy.INCLUDE // config, logback, and plugin yml files are not dupes - https://github.com/gradle/gradle/issues/17236
+		duplicatesStrategy DuplicatesStrategy.EXCLUDE // config, logback, and plugin yml files are not dupes - https://github.com/gradle/gradle/issues/17236
 		filter ReplaceTokens, tokens: [version: version]
 	}
 }
@@ -54,7 +54,7 @@ processResources {
 // Create a fat jar at: build/libs/
 jar {
 	from {
-		duplicatesStrategy DuplicatesStrategy.INCLUDE // primarily META-INF duplicates
+		duplicatesStrategy DuplicatesStrategy.EXCLUDE // primarily META-INF duplicates
 		configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
 	}
 }
