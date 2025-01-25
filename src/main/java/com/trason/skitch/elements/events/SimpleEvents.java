@@ -141,7 +141,7 @@ public class SimpleEvents {
             .since("1.0.0");
 
         //! On Clip Create Event
-        Skript.registerEvent("Clip Create Event", SimpleEvent.class, BridgeEventPrediction.class,
+        Skript.registerEvent("Clip Create Event", SimpleEvent.class, BridgeEventClip.class,
                 "twitch clip create [event]")
             .description("Triggered when a clip is created in the given stream.",
                 "Please note that the Channels have to mention in the Login Code")
