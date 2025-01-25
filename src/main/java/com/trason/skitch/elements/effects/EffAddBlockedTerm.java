@@ -23,12 +23,13 @@ import static com.trason.skitch.elements.effects.EffLoginTwitchBot.clientOaToken
 
 
 @Name("Twitch Add Blocked Term")
-@Description("Adds a word or phrase to the broadcaster’s list of blocked terms. These are the terms that broadcasters don’t want used in their chat room.\n" +
-    "\n" +
-    "The term must contain a minimum of 2 characters and may contain up to a maximum of 500 characters.\n" +
-    "\n" +
-    "Terms can use a wildcard character (*). The wildcard character must appear at the beginning or end of a word, or set of characters. For example, *foo or foo*.\n" +
-    "The bot needs to be at least Moderator!!!")
+@Description("""
+    Adds a word or phrase to the broadcaster’s list of blocked terms. These are the terms that broadcasters don’t want used in their chat room.
+
+    The term must contain a minimum of 2 characters and may contain up to a maximum of 500 characters.
+
+    Terms can use a wildcard character (*). The wildcard character must appear at the beginning or end of a word, or set of characters. For example, *foo or foo*.
+    The bot needs to be at least Moderator!!!""")
 @Examples("add blocked twitch term \"example\"")
 @Since("1.4.1")
 public class EffAddBlockedTerm extends Effect {
