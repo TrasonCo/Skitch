@@ -5,8 +5,7 @@ import ch.njol.skript.classes.Parser;
 import ch.njol.skript.lang.ParseContext;
 import ch.njol.skript.registrations.Classes;
 import com.github.twitch4j.helix.domain.Prediction;
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
+import com.trason.skitch.elements.effects.EffCheckYouTubeUpload;
 import org.jetbrains.annotations.Nullable;
 
 public final class Types {
@@ -41,6 +40,31 @@ public final class Types {
                 }
             }));
 
+
+
+        Classes.registerClass(new ClassInfo<>(EffCheckYouTubeUpload.VideoDetails.class, "videodetails")
+            .parser(new Parser<EffCheckYouTubeUpload.VideoDetails>() {
+
+                @Override
+                public String toString(EffCheckYouTubeUpload.VideoDetails o, int flags) {
+                    return toVariableNameString(o);
+                }
+
+                @Override
+                public String toVariableNameString(EffCheckYouTubeUpload.VideoDetails o) {
+                    return o.title() + " | " + o.videoUrl();
+                }
+
+                @Override
+                public boolean canParse(ParseContext context) {
+                    return false;
+                }
+
+                @Override
+                public @Nullable EffCheckYouTubeUpload.VideoDetails parse(String s, ParseContext context) {
+                    return null;
+                }
+            }));
     }
 
 }
